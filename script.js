@@ -50,6 +50,7 @@
          container.appendChild(resetButton);
          document.getElementsByTagName('body')['0'].appendChild(container);
       };
+      self.inject();
    };
 
 
