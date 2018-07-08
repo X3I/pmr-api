@@ -30,7 +30,7 @@ window.pApi = function(utilities) {
          'username': username,
          'password': password
       }), function(data) {
-         ((match = data.match(/token\s*=\s*\'([^\']*)/ig)) && (success && success(match['1'])) : (error && error()));
+         //((match = data.match(/token\s*=\s*\'([^\']*)/ig)) && (success && success(match['1'])) : (error && error()));
       });
    };
 };
