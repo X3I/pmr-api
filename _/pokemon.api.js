@@ -1,4 +1,4 @@
-window.pApi = function(utilities) {
+window.pApi = function(utilities, socket) {
    var self      = this;
    self.register = function(username, password, email, monsterId, success, error) {
       utilities.postRequest('/ajax/register', utilities.queryString({
