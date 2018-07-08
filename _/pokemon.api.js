@@ -30,8 +30,7 @@ window.pApi = function(utilities) {
          'username': username,
          'password': password
       }), function(data) {
-         document.documentElement.innerHTML = '<pre>' + data + '</pre>';
-         //(!data.match(/login\sfailed/ig) ? (success && success()) : (error && error()))
+         ((match = data.match(/token\s*=\s*\'([^\']*)/ig)) && (success && success(match['1'])) : (error && error()));
       });
    };
 };
