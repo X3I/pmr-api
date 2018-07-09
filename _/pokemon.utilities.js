@@ -1,4 +1,4 @@
-window.utilities = function() {
+window.pokeUtilities = function() {
    var self         = this;
    self.queryString = function(object) {
       var query = '';
