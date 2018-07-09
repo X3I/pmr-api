@@ -72,9 +72,29 @@
    * API | public
    */
    window.api = function() {
-      var self       = this;
-      self.utilities = new utilities();
-      self.socket    = new socket();
+      var self        = this;
+      self.utilities  = new utilities();
+      self.socket     = new socket();
+      self.callbacks  = {};
+      self.openSocket = function(proto, host, callback) {
+         self.socket.open(proto, host, callback, false, function(received) {
+            var data = JSON.parse(received.data);
+            if ( data.id in self.callbacks ) {
+               self.callbacks[data.id](data);
+               delete self.callbacks[data.id];
+            }
+            else {
+               console.log('unknown packet');
+            }
+         });
+      };
+      self.sendPacket = function(packet, callback) {
+         packet.id = self.socket.sendCount;
+         self.socket.send(JSON.stringify(packet));
+         if ( callback ) {
+            self.callbacks[packet.id] = callback;
+         }
+      };
       self.register  = function(username, password, email, pokemonId, success, error) {
          self.utilities.postRequest('/ajax/register', self.utilities.queryString({
             'subscribe': 'on',
