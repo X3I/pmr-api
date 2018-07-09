@@ -86,7 +86,7 @@
       var self       = this;
       self.utilities = new utilities();
       self.socket    = new socket(proto, host);
-      self.useEmote = function(emote) {
+      self.useEmote  = function(emote) {
          self.socket.send({
             'a': 'emote',
             'p': {
@@ -175,7 +175,7 @@
             }
          }, callback);
       };
-      self.register  = function(username, password, email, pokemonId, success, error) {
+      self.register = function(username, password, email, pokemonId, success, error) {
          self.utilities.postRequest('/ajax/register', self.utilities.queryString({
             'subscribe': 'on',
             'username':  username,
