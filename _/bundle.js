@@ -62,7 +62,7 @@
                delete self.callbacks[data.id];
             }
             else {
-               console.log(data);
+               // console.log(data);
             }
          };
       };
