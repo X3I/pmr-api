@@ -86,6 +86,95 @@
       var self       = this;
       self.utilities = new utilities();
       self.socket    = new socket(proto, host);
+      self.useEmote = function(emote) {
+         self.socket.send({
+            'a': 'emote',
+            'p': {
+               'style': emote
+            }
+         }, callback);
+      };
+      self.changeLocation = function(x, y) {
+         self.socket.send({
+            'a':      'target',
+            'direct': 0,
+            'p':      {
+               'x': x,
+               'y': y
+            }
+         }, callback);
+      };
+      self.addFriend = function(username) {
+         self.socket.send({
+            'a': 'friend_request',
+            'p': {
+               'name': username
+            }
+         }, callback);
+      };
+      self.sendoutPokemon = function(position, pokemonId) {
+         self.socket.send({
+            'a': 'call',
+            'p': {
+               'action':   'sendout'
+               'position': position,
+               'pk':       pokemonId
+            }
+         }, callback);
+      };
+      self.withdrawPokemon = function(position, pokemonId) {
+         self.socket.send({
+            'a': 'call',
+            'p': {
+               'action':   'withdraw'
+               'position': position,
+               'pk':       pokemonId
+            }
+         }, callback);
+      };
+      self.privateMessage = function(username, text) {
+         self.socket.send({
+            'a': 'message',
+            'p': {
+               'chatroom': '1'
+               'text':     '/pm' + ' ' + username + ' ' + text
+            }
+         }, callback);
+      };
+      self.globalMessage = function(text) {
+         self.socket.send({
+            'a': 'message',
+            'p': {
+               'chatroom': '1'
+               'text':     text
+            }
+         }, callback);
+      };
+      self.guildMessage = function(text) {
+         self.socket.send({
+            'a': 'message',
+            'p': {
+               'chatroom': 'P'
+               'text':     text
+            }
+         }, callback);
+      };
+      self.startTrade = function(username, text) {
+         self.socket.send({
+            'a': 'trade_request',
+            'p': {
+               'name': username
+            }
+         }, callback);
+      };
+      self.speakToNpc = function(npc) {
+         self.socket.send({
+            'a': 'action',
+            'p': {
+               'npc': npc
+            }
+         }, callback);
+      };
       self.register  = function(username, password, email, pokemonId, success, error) {
          self.utilities.postRequest('/ajax/register', self.utilities.queryString({
             'subscribe': 'on',
