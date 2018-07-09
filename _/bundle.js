@@ -53,9 +53,9 @@
             self.connected = false;
             (closeCallback && closeCallback());
          };
-         self.ws.onmessage = function(received) {
+         self.ws.onmessage = function(event) {
             ++self.receiveCount;
-            (receiveCallback && receiveCallback(received));
+            (receiveCallback && receiveCallback(event.data));
          };
       };
       self.close = function() {
@@ -72,29 +72,9 @@
    * API | public
    */
    window.api = function() {
-      var self        = this;
-      self.utilities  = new utilities();
-      self.socket     = new socket();
-      self.callbacks  = {};
-      self.openSocket = function(proto, host, callback) {
-         self.socket.open(proto, host, callback, false, function(received) {
-            var data = JSON.parse(received.data);
-            if ( data.id in self.callbacks ) {
-               self.callbacks[data.id](data);
-               delete self.callbacks[data.id];
-            }
-            else {
-               console.log(data);
-            }
-         });
-      };
-      self.sendPacket = function(packet, callback) {
-         packet.id = self.socket.sendCount;
-         self.socket.send(JSON.stringify(packet));
-         if ( callback ) {
-            self.callbacks[packet.id] = callback;
-         }
-      };
+      var self       = this;
+      self.utilities = new utilities();
+      self.socket    = new socket();
       self.register  = function(username, password, email, pokemonId, success, error) {
          self.utilities.postRequest('/ajax/register', self.utilities.queryString({
             'subscribe': 'on',
