@@ -154,6 +154,23 @@
             }
          });
       };
+      self.tradeMoney = function(amount) {
+         self.socket.send({
+            'a': 'trade_update',
+            'p': {
+               'action': 'money',
+               'money':  amount,
+            }
+         });
+      };
+      self.lockTrade = function() {
+         self.socket.send({
+            'a': 'trade_update',
+            'p': {
+               'action': 'lock'
+            }
+         });
+      };
       self.speakToNpc = function(npc) {
          self.socket.send({
             'a': 'action',
