@@ -146,6 +146,14 @@
             }
          });
       };
+      self.acceptTrade = function(userId) {
+         self.socket.send({
+            'a': 'trade_start',
+            'p': {
+               'with': userId
+            }
+         });
+      };
       self.speakToNpc = function(npc) {
          self.socket.send({
             'a': 'action',
