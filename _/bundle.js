@@ -89,7 +89,7 @@
          });
       };
       self.sendPacket = function(packet, callback) {
-         packet.id = self.socket.sendCount;
+         packet.id = 'P' + self.socket.sendCount;
          self.socket.send(JSON.stringify(packet));
          if ( callback ) {
             self.callbacks[packet.id] = callback;
