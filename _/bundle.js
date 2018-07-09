@@ -111,26 +111,6 @@
             }
          }, callback);
       };
-      self.sendoutPokemon = function(position, pokemonId, callback) {
-         self.socket.send({
-            'a': 'call',
-            'p': {
-               'action':   'sendout',
-               'position': position,
-               'pk':       pokemonId
-            }
-         }, callback);
-      };
-      self.withdrawPokemon = function(position, pokemonId, callback) {
-         self.socket.send({
-            'a': 'call',
-            'p': {
-               'action':   'withdraw',
-               'position': position,
-               'pk':       pokemonId
-            }
-         }, callback);
-      };
       self.privateMessage = function(username, text, callback) {
          self.socket.send({
             'a': 'message',
