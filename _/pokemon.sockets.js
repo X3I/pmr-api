@@ -1,40 +1,92 @@
-window.pSocket = function(proto, host, port, suffix) {
+window.socket = function(proto, host) {
    var self       = this;
    self.proto     = proto;
    self.host      = host;
-   self.port      = port;
-   self.suffix    = suffix;
    self.ws        = false;
    self.connected = false;
-   self.sendCount = 0;
+   self.sentCount = 0;
    self.callbacks = {};
    self.open      = function() {
-      self.ws = new WebSocket(self.proto + '://' + self.host + ':' + self.port + '/' + self.suffix);
+      self.ws = new WebSocket(self.proto + '://' + self.host);
    };
    self.setEvents = function() {
       self.ws.onopen = function() {
-      	self.connected = true;
+         self.connected = true;
       };
       self.ws.onclose = function() {
-      	self.connected = false;
+         self.connected = false;
       };
       self.ws.onmessage = function(event) {
-         var data = JSON.parse(event.data);
-         if ( data.id in self.callbacks ) {
-            self.callbacks[data.id](data);
-            delete self.callbacks[data.id];
-         }
-         else {
-            //console.log(data);
-         }
+         self.receive(JSON.parse(event.data));
       };
    };
-   self.packet = function(packet, callback) {
-   	packet.id = 'P' + (self.sendCount++);
-   	self.ws.send(JSON.stringify(packet));
-   	if ( callback ) {
-   	   self.callbacks[packet.id] = callback;
-   	}
+   self.receive = function(packet) {
+      if ( packet.id in self.callbacks ) {
+         self.callbacks[packet.id](packet);
+         delete self.callbacks[packet.id];
+      }
+      else {
+         switch ( packet.a ) {
+            case 'l':
+            break;
+            case 'u':
+            break;
+            case 'fainted':
+            break;
+            case 'npc':
+            break;
+            case 'trade_complete':
+            break;
+            case 'switches':
+            break;
+            case 't':
+            break;
+            case 'ent':
+            break;
+            case 'static':
+            break;
+            case 'friend_remove':
+            break;
+            case 'trade_update':
+            break;
+            case 'f':
+            break;
+            break;
+            case 'event':
+            break;
+            case 'm':
+            break;
+            break;
+            case 'e':
+            break;
+            case 'url':
+            break;
+            break;
+            case 'team':
+            break;
+            case 'items':
+            break;
+            break;
+            case 'ailment':
+            break;
+            case 'attack':
+            break;
+            case 'emote':
+            break;
+            case 'evo':
+            break;
+            case 'usermenu':
+            break;
+         }
+      }
+   };
+   self.send = function(packet, callback) {
+      packet.id = 'P' + self.sentCount;
+      self.ws.send(JSON.stringify(packet));
+      ++self.sentCount;
+      if ( callback ) {
+         self.callbacks[packet.id] = callback;
+      }
    };
    self.open();
    self.setEvents();
