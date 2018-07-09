@@ -138,7 +138,7 @@
             }
          });
       };
-      self.startTrade = function(username) {
+      self.tradeRequest = function(username) {
          self.socket.send({
             'a': 'trade_request',
             'p': {
@@ -146,7 +146,7 @@
             }
          });
       };
-      self.acceptTrade = function(userId) {
+      self.tradeStart = function(userId) {
          self.socket.send({
             'a': 'trade_start',
             'p': {
@@ -168,6 +168,14 @@
             'a': 'trade_update',
             'p': {
                'action': 'lock'
+            }
+         });
+      };
+      self.acceptTrade = function() {
+         self.socket.send({
+            'a': 'trade_update',
+            'p': {
+               'action': 'accept'
             }
          });
       };
