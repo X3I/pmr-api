@@ -137,7 +137,7 @@
             'a': 'message',
             'p': {
                'chatroom': '1'
-               'text':     '/pm' + ' ' + username + ' ' + text
+               'text':     '/pm ' + username + ' ' + text
             }
          }, callback);
       };
