@@ -2,7 +2,7 @@
 
 
    /*
-   * POKEMON UTILITIES | private
+   * UTILITIES | private
    */
    var utilities = function() {
       var self         = this;
@@ -35,7 +35,7 @@
 
 
    /*
-   * POKEMON SOCKET | private
+   * SOCKET | private
    */
    var socket = function() {
       var self          = this;
@@ -69,7 +69,7 @@
 
 
    /*
-   * POKEMON API | public
+   * API | public
    */
    window.api = function() {
       var self       = this;
