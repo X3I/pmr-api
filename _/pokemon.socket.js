@@ -1,11 +1,11 @@
-window.socket = function(proto, host) {
+window.socket = function(server) {
    var self       = this;
    self.ws        = false;
    self.connected = false;
    self.sentCount = 0;
    self.callbacks = {};
-   self.open      = function(proto, host) {
-      self.ws        = new WebSocket(proto + '://' + host);
+   self.open      = function(server) {
+      self.ws        = new WebSocket(server);
       self.ws.onopen = function() {
          self.connected = true;
       };
@@ -84,5 +84,5 @@ window.socket = function(proto, host) {
          self.callbacks[packet.id] = callback;
       }
    };
-   self.open(proto, host);
+   self.open(server);
 };
