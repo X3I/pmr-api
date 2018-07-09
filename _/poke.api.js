@@ -34,9 +34,7 @@ window.pokeApi = function(utilities, socket) {
       });
    };
    self.authenticate = function(token, callback) {
-      socket.send({'a': 'auth', 'p': {'token': token}}), function(data) {
-         callback(data);
-      });
+      socket.send({'a': 'auth', 'p': {'token': token}}), callback);
    };
    self.useEmote = function(emote) {
       socket.send({'a': 'emote', 'p': {'style': emote}});
