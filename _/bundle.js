@@ -62,8 +62,8 @@
          self.ws.close();
       };
       self.send = function(data) {
-	   	++self.sendCount;
-	   	self.ws.send(data);
+         ++self.sendCount;
+         self.ws.send(data);
       };
    };
 
