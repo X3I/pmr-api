@@ -84,7 +84,7 @@
                delete self.callbacks[data.id];
             }
             else {
-               console.log('unknown packet');
+               console.log(data);
             }
          });
       };
