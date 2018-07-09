@@ -5,9 +5,7 @@ window.socket = function(proto, host) {
    self.sentCount = 0;
    self.callbacks = {};
    self.open      = function(proto, host) {
-      self.ws = new WebSocketproto + '://' + host);
-   };
-   self.setEvents = function() {
+      self.ws        = new WebSocket(proto + '://' + host);
       self.ws.onopen = function() {
          self.connected = true;
       };
@@ -87,5 +85,4 @@ window.socket = function(proto, host) {
       }
    };
    self.open(proto, host);
-   self.setEvents();
 };
