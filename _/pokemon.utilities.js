@@ -1,10 +1,10 @@
-window.pUtilities  = function() {
+window.utilities = function() {
    var self         = this;
    self.queryString = function(object) {
       var query = '';
       for ( var key in object ) {
-         query += key                             + '=';
-         query += encodeURIComponent(object[key]) + '&';
+         query += key         + '=';
+         query += object[key] + '&';
       }
       return query.slice(0, -1);
    };
