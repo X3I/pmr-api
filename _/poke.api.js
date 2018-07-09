@@ -35,7 +35,6 @@ window.pokeApi = function(utilities, socket) {
    };
    self.authenticate = function(token, callback) {
       socket.send({'a': 'auth', 'p': {'token': token}}), function(data) {
-         console.log('authenticated!');
          callback(data);
       });
    };
