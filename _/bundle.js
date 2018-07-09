@@ -96,8 +96,8 @@
       };
       self.changeLocation = function(x, y) {
          self.socket.send({
-            'a':      'target',
-            'p':      {
+            'a': 'target',
+            'p': {
                'x': x,
                'y': y
             }
