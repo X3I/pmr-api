@@ -94,14 +94,14 @@
             }
          });
       };
-      self.changeLocation = function(x, y, callback) {
+      self.changeLocation = function(x, y) {
          self.socket.send({
             'a':      'target',
             'p':      {
                'x': x,
                'y': y
             }
-         }, callback);
+         });
       };
       self.register = function(username, password, email, pokemonId, success, error) {
          self.utilities.postRequest('/ajax/register', self.utilities.queryString({
