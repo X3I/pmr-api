@@ -86,11 +86,20 @@
       var self       = this;
       self.utilities = new utilities();
       self.socket    = new socket(proto, host);
-      self.useEmote  = function(emote, callback) {
+      self.useEmote  = function(emote) {
          self.socket.send({
             'a': 'emote',
             'p': {
                'style': emote
+            }
+         });
+      };
+      self.changeLocation = function(x, y, callback) {
+         self.socket.send({
+            'a':      'target',
+            'p':      {
+               'x': x,
+               'y': y
             }
          }, callback);
       };
