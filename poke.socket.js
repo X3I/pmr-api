@@ -24,34 +24,31 @@ window.pokeSocket = function(server, utilities, data) {
       else {
          switch ( packet.a ) {
             case 'ent':
-               for ( var players = [], wild = [], owned = [], entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
+               for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
                   if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
-                     players.push({
+                     data.players[entities[i].id] = {
                         'admin': entities[i].admin,
                         'name':  entities[i].id,
                         'money': entities[i].money
-                     });
+                     };
                   }
                   if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
-                     wild.push({
+                     data.wildPokemon[entities[i].id] = {
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
                         'shiny':     entities[i].shiny
-                     });
+                     };
                   }
                   if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
-                     owned.push({
+                     data.ownedPokemon[entities[i].id] = {
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
                         'shiny':     entities[i].shiny
-                     });
+                     };
                   }
                }
-               data.players      = players;
-               data.wildPokemon  = wild;
-               data.ownedPokemon = owned;
             break;
             case 'l':
             break;
