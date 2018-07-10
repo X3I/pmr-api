@@ -24,6 +24,7 @@ window.pokeSocket = function(server, utilities, data) {
       else {
          switch ( packet.a ) {
             case 'ent':
+               console.log(packet.p.entities);
                for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
                   if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
                      data.players.push({
