@@ -102,4 +102,7 @@ window.pokeApi = function(utilities, data, socket) {
    self.changeSkill = function(id, index) {
       socket.send({'a': 'skill', 'p': {'pk': id, 'index': index}});
    };
+   self.dumpData = function() {
+      console.log(data);
+   };
 };
