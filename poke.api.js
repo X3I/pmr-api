@@ -1,4 +1,4 @@
-window.pokeApi = function(utilities, socket) {
+window.pokeApi = function(utilities, data, socket) {
    var self      = this;
    self.register = function(username, password, email, pokemonId, success, error) {
       utilities.postRequest('/ajax/register', utilities.queryString({
