@@ -40,7 +40,7 @@ window.pokeApi = function(utilities, socket) {
       socket.send({'a': 'emote', 'p': {'style': emote}});
    };
    self.moveAvatar = function(x, y) {
-      socket.send({'a': 'target', 'p': {'x': x, 'y': y}});
+      socket.send({'a': 'target', 'direct': 0, 'p': {'x': x, 'y': y}});
    };
    self.addFriend = function(username) {
       socket.send({'a': 'friend_request', 'p': {'name': username}});
@@ -71,5 +71,26 @@ window.pokeApi = function(utilities, socket) {
    };
    self.speakToNpc = function(npc) {
       socket.send({'a': 'action', 'p': {'npc': npc}});
+   };
+   self.useMasterBall = function(target) {
+      socket.send({'a': 'pokeball', 'p': {'t': target, 'i': 1}});
+   };
+   self.useUltraBall = function(target) {
+      socket.send({'a': 'pokeball', 'p': {'t': target, 'i': 2}});
+   };
+   self.useGreatBall = function(target) {
+      socket.send({'a': 'pokeball', 'p': {'t': target, 'i': 3}});
+   };
+   self.usePokeBall = function(target) {
+      socket.send({'a': 'pokeball', 'p': {'t': target, 'i': 4}});
+   };
+   self.withdrawPokemon = function(position, id) {
+      socket.send({'a': 'call', 'p': {'position': position, 'pk': id, 'action': 'withdraw'}});
+   };
+   self.sendoutPokemon = function(position, id) {
+      socket.send({'a': 'call', 'p': {'position': position, 'pk': id, 'action': 'sendout'}});
+   };
+   self.changeSkill = function(id, index) {
+      socket.send({'a': 'skill', 'p': {'pk': id, 'index': index}});
    };
 };
