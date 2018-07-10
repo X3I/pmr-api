@@ -26,7 +26,7 @@ window.pokeSocket = function(server, utilities, data) {
             case 'ent':
                for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
                   if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
-                     utilities.deleteBy(data.players, 'name', entities[i].admin);
+                     utilities.deleteBy(data.players, 'name', entities[i].id);
                      data.players.push({
                         'admin': entities[i].admin,
                         'name':  entities[i].id,
