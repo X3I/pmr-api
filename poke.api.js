@@ -3,7 +3,7 @@ window.pokeApi = function(utilities, data, socket) {
    self.utilities = utilities;
    self.data      = data;
    self.socket    = socket;
-   self.register = function(username, password, email, pokemonId, success, error) {
+   self.register  = function(username, password, email, pokemonId, success, error) {
       self.utilities.postRequest('/ajax/register', self.utilities.queryString({
          'subscribe': 'on',
          'username':  username,
