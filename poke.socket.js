@@ -1,4 +1,4 @@
-window.pokeSocket = function(server) {
+window.pokeSocket = function(server, utilities, data) {
    var self       = this;
    self.ws        = false;
    self.connected = false;
