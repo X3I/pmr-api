@@ -96,6 +96,9 @@ window.pokeApi = function(utilities, socket) {
    self.sendoutPokemon = function(position, id) {
       socket.send({'a': 'call', 'p': {'position': position, 'pk': id, 'action': 'sendout'}});
    };
+   self.evolvePokemon = function(id, from, to) {
+      socket.send({'a': 'evo', 'p': {'pk': id, 'from': from, 'to': to}});
+   };
    self.changeSkill = function(id, index) {
       socket.send({'a': 'skill', 'p': {'pk': id, 'index': index}});
    };
