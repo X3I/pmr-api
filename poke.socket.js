@@ -4,7 +4,7 @@ window.pokeSocket = function(server, utilities, data) {
    self.connected = false;
    self.sentCount = 0;
    self.callbacks = {};
-   self.open      = function(server) {
+   self.open      = function() {
       self.ws        = new WebSocket(server);
       self.ws.onopen = function() {
          self.connected = true;
@@ -23,6 +23,33 @@ window.pokeSocket = function(server, utilities, data) {
       }
       else {
          switch ( packet.a ) {
+            case 'ent':
+               for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
+                  if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
+                     data.players.push({
+                        'admin': entities[i].admin,
+                        'name':  entities[i].id,
+                        'money': entities[i].money
+                     });
+                  }
+                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
+                     data.wildPokemon.push({
+                        'health':    entities[i].hp / entities[i].hpt * 100,
+                        'id':        entities[i].id,
+                        'monsterId': entities[i].monsterId,
+                        'shiny':     entities[i].shiny
+                     });
+                  }
+                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
+                     data.ownedPokemon.push({
+                        'health':    entities[i].hp / entities[i].hpt * 100,
+                        'id':        entities[i].id,
+                        'monsterId': entities[i].monsterId,
+                        'shiny':     entities[i].shiny
+                     });
+                  }
+               }
+            break;
             case 'l':
             break;
             case 'u':
@@ -36,8 +63,6 @@ window.pokeSocket = function(server, utilities, data) {
             case 'switches':
             break;
             case 't':
-            break;
-            case 'ent':
             break;
             case 'static':
             break;
@@ -84,5 +109,5 @@ window.pokeSocket = function(server, utilities, data) {
          self.callbacks[packet.id] = callback;
       }
    };
-   self.open(server);
+   self.open();
 };
