@@ -1,13 +1,13 @@
 window.pokeUtilities = function() {
    var self           = this;
-	self.arrayInObject = function(object, array) {
-	   for ( var i = 0; i < array.length; i++ ) {
-	      if ( !(array[i] in object) ) {
-	         return false;
-	      }
-	   }
-	   return true;
-	};
+   self.arrayInObject = function(object, array) {
+      for ( var i = 0; i < array.length; i++ ) {
+         if ( !(array[i] in object) ) {
+            return false;
+         }
+      }
+   return true;
+   };
    self.queryString = function(object) {
       var query = '';
       for ( var key in object ) {
