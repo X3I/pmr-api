@@ -63,6 +63,12 @@ window.pokeApi = function(utilities, socket) {
    self.tradeMoney = function(amount) {
       socket.send({'a': 'trade_update', 'p': {'action': 'money', 'money': amount}});
    };
+   self.tradePokemon = function(id) {
+      socket.send({'a': 'trade_update', 'p': {'action': 'pokemon_add', 'pk': id}});
+   };
+   self.tradeItem = function(id) {
+      socket.send({'a': 'trade_update', 'p': {'action': 'item_add', 'pk': id}});
+   };
    self.lockTrade = function() {
       socket.send({'a': 'trade_update', 'p': {'action': 'lock'}});
    };
