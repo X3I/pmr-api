@@ -13,7 +13,7 @@ window.pokeSocket = function(server, utilities, data) {
          self.connected = false;
       };
       self.ws.onmessage = function(event) {
-         console.log(JSON.parse(event.data));
+         console.log(event);
       };
    };
    self.receive = function(packet) {
