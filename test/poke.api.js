@@ -4,8 +4,8 @@ window.pokeApi = function(server, utilities) {
    self.setSocket = function(socket) {
       self.socket = socket;
    };
-   self.parsePacket = function(packet) {
-      console.log(packet);
+   self.parsePacket = function(data) {
+      console.log(JSON.stringify(data));
    };
    utilities.interceptSocket(server, self.setSocket, self.parsePacket);
 };
