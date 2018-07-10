@@ -25,9 +25,9 @@ window.pokeUtilities = function() {
    };
    self.interceptSocket = function(url, set, parse) {
       var websocket    = window.WebSocket;
-      window.WebSocket = function(arg1, arg2) {
-         var ws = new websocket(arg1 || '', arg2 || '');
-         (url == arg1 && set(ws));
+      window.WebSocket = function(server) {
+         var ws = new websocket(server);
+         (url == server && set(ws));
          ws.addEventListener('message', function(event) {
             (url == this.url && parse(JSON.parse(event.data)));
          });
