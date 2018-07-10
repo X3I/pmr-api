@@ -17,89 +17,12 @@ window.pokeSocket = function(server, utilities, data) {
       };
    };
    self.receive = function(packet) {
-                     console.log(packet);
+      console.log(packet);
       if ( packet.id in self.callbacks ) {
          self.callbacks[packet.id](packet);
          delete self.callbacks[packet.id];
       }
       else {
-         switch ( packet.a ) {
-            case 'ent':
-               for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
-                  if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
-                     data.players.push({
-                        'admin': entities[i].admin,
-                        'name':  entities[i].id,
-                        'money': entities[i].money
-                     });
-                  }
-                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
-                     data.wildPokemon.push({
-                        'health':    entities[i].hp / entities[i].hpt * 100,
-                        'id':        entities[i].id,
-                        'monsterId': entities[i].monsterId,
-                        'shiny':     entities[i].shiny
-                     });
-                  }
-                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
-                     data.ownedPokemon.push({
-                        'health':    entities[i].hp / entities[i].hpt * 100,
-                        'id':        entities[i].id,
-                        'monsterId': entities[i].monsterId,
-                        'shiny':     entities[i].shiny
-                     });
-                  }
-               }
-            break;
-            case 'l':
-            break;
-            case 'u':
-            break;
-            case 'fainted':
-            break;
-            case 'npc':
-            break;
-            case 'trade_complete':
-            break;
-            case 'switches':
-            break;
-            case 't':
-            break;
-            case 'static':
-            break;
-            case 'friend_remove':
-            break;
-            case 'trade_update':
-            break;
-            case 'f':
-            break;
-            break;
-            case 'event':
-            break;
-            case 'm':
-            break;
-            break;
-            case 'e':
-            break;
-            case 'url':
-            break;
-            break;
-            case 'team':
-            break;
-            case 'items':
-            break;
-            break;
-            case 'ailment':
-            break;
-            case 'attack':
-            break;
-            case 'emote':
-            break;
-            case 'evo':
-            break;
-            case 'usermenu':
-            break;
-         }
       }
    };
    self.send = function(packet, callback) {
