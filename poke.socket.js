@@ -8,7 +8,7 @@ window.pokeSocket = function(server, utilities, data) {
    self.sentCount = 0;
    self.callbacks = {};
    self.open      = function() {
-      self.ws        = new WebSocket(server);
+      self.ws        = new WebSocket(self.server);
       self.ws.onopen = function() {
          self.connected = true;
       };
