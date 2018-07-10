@@ -6,6 +6,7 @@ window.pokeUtilities = function() {
 	         return false;
 	      }
 	   }
+	   return true;
 	};
    self.queryString = function(object) {
       var query = '';
