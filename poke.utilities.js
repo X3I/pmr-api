@@ -8,6 +8,14 @@ window.pokeUtilities = function() {
       }
       return true;
    };
+   self.deleteBy = function(array, key, value) {
+      for ( var i = 0; i < array.length; i++ ) {
+         if ( array[i][key] == value ) {
+            array.splice(i, 1);
+            break;
+         }
+      }
+   };
    self.queryString = function(object) {
       var query = '';
       for ( var key in object ) {
