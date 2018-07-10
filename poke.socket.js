@@ -1,5 +1,8 @@
 window.pokeSocket = function(server, utilities, data) {
    var self       = this;
+   self.server    = server;
+   self.utilities = utilities;
+   self.data      = data;
    self.ws        = false;
    self.connected = false;
    self.sentCount = 0;
@@ -25,23 +28,23 @@ window.pokeSocket = function(server, utilities, data) {
          switch ( packet.a ) {
             case 'ent':
                for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
-                  if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
-                     data.players.push({
+                  if ( entities[i].type == 0 && self.utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
+                     self.data.players.push({
                         'admin': entities[i].admin,
                         'name':  entities[i].id,
                         'money': entities[i].money
                      });
                   }
-                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
-                     data.wildPokemon.push({
+                  if ( entities[i].type == 1 && self.utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
+                     self.data.wildPokemon.push({
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
                         'shiny':     entities[i].shiny
                      });
                   }
-                  if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
-                     data.ownedPokemon.push({
+                  if ( entities[i].type == 1 && self.utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
+                     self.data.ownedPokemon.push({
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
