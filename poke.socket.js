@@ -26,27 +26,30 @@ window.pokeSocket = function(server, utilities, data) {
             case 'ent':
                for ( var entities = packet.p.entities, i = 0; i < entities.length; i++ ) {
                   if ( entities[i].type == 0 && utilities.arrayInObject(entities[i], ['id', 'money', 'admin']) ) {
-                     data.players[entities[i].id] = {
+                     utilities.deleteBy(data.players, 'name', entities[i].admin);
+                     data.players.push({
                         'admin': entities[i].admin,
                         'name':  entities[i].id,
                         'money': entities[i].money
-                     };
+                     });
                   }
                   if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^m/) ) {
-                     data.wildPokemon[entities[i].id] = {
+                     utilities.deleteBy(data.players, 'id', entities[i].id);
+                     data.wildPokemon.push({
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
                         'shiny':     entities[i].shiny
-                     };
+                     });
                   }
                   if ( entities[i].type == 1 && utilities.arrayInObject(entities[i], ['hp', 'hpt', 'id', 'monsterId', 'shiny']) && entities[i].id.match(/^p/) ) {
-                     data.ownedPokemon[entities[i].id] = {
+                     utilities.deleteBy(data.players, 'id', entities[i].id);
+                     data.ownedPokemon.push({
                         'health':    entities[i].hp / entities[i].hpt * 100,
                         'id':        entities[i].id,
                         'monsterId': entities[i].monsterId,
                         'shiny':     entities[i].shiny
-                     };
+                     });
                   }
                }
             break;
