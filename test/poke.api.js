@@ -24,8 +24,7 @@ window.pokeApi = function(server, utilities, data) {
                pokemon.name,
                packet.entities[i].hp - packet.entities[i].hpt / 100,
                pokemon.rarity,
-               packet.entities[i].shiny,
-               packet.entities[i].id.match(/^p/)
+               packet.entities[i].shiny
             );
          }
       }
@@ -38,7 +37,8 @@ window.pokeApi = function(server, utilities, data) {
          'money': money
       });
    };
-   self.logPokemon = function(id, monsterId, name, health, rarity, shiny, owned) {
+   self.logPokemon = function(id, monsterId, name, health, rarity, shiny) {
+      var owned = (id.match(/^p/) ? true : false);
       utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'name', name);
       data[owned ? 'trainerPokemon' : 'wildPokemon'].push({
          'id':        id,
