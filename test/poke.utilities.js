@@ -29,7 +29,7 @@ window.pokeUtilities = function() {
          var ws = new websocket(server);
          (url == server && set(ws));
          ws.addEventListener('message', function(event) {
-            (url == this.url && parse(JSON.parse(event.data)));
+            (url == this.url && parse(event.data));
          });
          return ws;
       };
