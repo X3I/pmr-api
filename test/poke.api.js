@@ -1,4 +1,4 @@
-window.pokeApi = function(server, utilities) {
+window.pokeApi = function(server, utilities, data) {
    var self       = this;
    self.socket    = false;
    self.setSocket = function(socket) {
@@ -8,7 +8,9 @@ window.pokeApi = function(server, utilities) {
       self.socket.send(JSON.stringify({'a': action, 'p': packet}));
    };
    self.parsePacket = function(data) {
-      // console.log(JSON.stringify(data));
+      var action = data.a;
+      var packet = data.p;
+      console.log(action);
    };
    self.useEmote = function(emote) {
    	self.sendPacket('emote', {'style': emote});
