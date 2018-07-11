@@ -9,7 +9,6 @@ window.pokeApi = function(server, utilities, data) {
    };
    self.parsePacket = function(packet) {
       for ( var packet = JSON.parse(packet), pokemon = false, i = 0; packet.a == 'ent' && i < packet.p.entities.length; i++ ) {
-         console.log(packet.p.entities[i]);
          if ( packet.p.entities[i].type == 0 && utilities.keysInObject(packet.p.entities[i], ['admin', 'id', 'money']) ) {
             self.logTrainer(
                packet.p.entities[i].admin,
@@ -18,7 +17,7 @@ window.pokeApi = function(server, utilities, data) {
             );
          }
          if ( packet.p.entities[i].type == 1 && utilities.keysInObject(packet.p.entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny']) ) {
-            pokemon = utilities.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
+            pokemon = self.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
             self.logPokemon(
                packet.p.entities[i].id,
                packet.p.entities[i].monsterId,
@@ -32,7 +31,7 @@ window.pokeApi = function(server, utilities, data) {
    };
    self.logTrainer = function(admin, name, money) {
       utilities.deleteBy(data.trainers, 'name', name);
-      data.wildPokemon.push({
+      data.trainers.push({
          'admin': admin,
          'name':  name,
          'money': money
@@ -40,7 +39,7 @@ window.pokeApi = function(server, utilities, data) {
    };
    self.logPokemon = function(id, monsterId, name, health, rarity, shiny) {
       var owned = (id.match(/^p/) ? true : false);
-      utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'id', id);
+      utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'name', name);
       data[owned ? 'trainerPokemon' : 'wildPokemon'].push({
          'id':        id,
          'monsterId': monsterId,
@@ -49,6 +48,9 @@ window.pokeApi = function(server, utilities, data) {
          'rarity':    rarity,
          'shiny':     shiny
       });
+   };
+   self.getData = function() {
+      return data;
    };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
