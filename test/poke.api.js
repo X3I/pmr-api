@@ -9,6 +9,7 @@ window.pokeApi = function(server, utilities, data) {
    };
    self.parsePacket = function(packet) {
       for ( var packet = JSON.parse(packet), pokemon = false, i = 0; packet.a == 'ent' && i < packet.p.entities.length; i++ ) {
+         console.log(packet.p.entities[i]);
          if ( packet.p.entities[i].type == 0 && utilities.keysInObject(packet.p.entities[i], ['admin', 'id', 'money']) ) {
             self.logTrainer(
                packet.p.entities[i].admin,
