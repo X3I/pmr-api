@@ -39,7 +39,7 @@ window.pokeApi = function(server, utilities, data) {
    };
    self.logPokemon = function(id, monsterId, name, health, rarity, shiny) {
       var owned = (id.match(/^p/) ? true : false);
-      utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'name', name);
+      utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'id', id);
       data[owned ? 'trainerPokemon' : 'wildPokemon'].push({
          'id':        id,
          'monsterId': monsterId,
