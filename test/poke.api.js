@@ -118,5 +118,14 @@ window.pokeApi = function(server, utilities, data) {
    self.changeSkill = function(id, index) {
       self.sendPacket('skill', {'pk': id, 'index': index});
    };
+   self.guildInvite = function(username) {
+      self.sendPacket('guildInvite', {'name': username});
+   };
+   self.guildUpdate = function(id, name, description, color) {
+      self.sendPacket('guildUpdate', {'guild_id': id, 'guild_name': name, 'guild_description': description, 'guild_color': color});
+   };
+   self.guildUpdate = function(money) {
+      self.sendPacket('guildTransferMoney', {'money': money});
+   };
    utilities.interceptSocket(server, self.setSocket, self.parsePacket);
 };
