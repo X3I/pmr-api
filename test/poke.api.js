@@ -17,7 +17,7 @@ window.pokeApi = function(server, utilities, data) {
             );
          }
          if ( packet.p.entities[i].type == 1 && utilities.keysInObject(packet.p.entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny']) ) {
-            pokemon = self.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
+            pokemon = utilities.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
             self.logPokemon(
                packet.p.entities[i].id,
                packet.p.entities[i].monsterId,
