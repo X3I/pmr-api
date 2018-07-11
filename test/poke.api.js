@@ -49,9 +49,6 @@ window.pokeApi = function(server, utilities, data) {
          'shiny':     shiny
       });
    };
-   self.getData = function() {
-      return data;
-   };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
