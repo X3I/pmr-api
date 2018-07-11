@@ -7,24 +7,24 @@ window.pokeApi = function(server, utilities, data) {
    self.sendPacket = function(action, packet) {
       self.socket.send(JSON.stringify({'a': action, 'p': packet}));
    };
-   self.parsePacket = function(action, packet) {
-      for ( var pokemon = false, i = 0; action == 'ent' && i < packet.entities.length; i++ ) {
-         if ( packet.entities[i].type == 0 && utilities.keysInObject(entities[i], ['admin', 'id', 'money']) ) {
+   self.parsePacket = function(packet) {
+      for ( var packet = JSON.parse(packet), pokemon = false, i = 0; packet.a == 'ent' && i < packet.p.entities.length; i++ ) {
+         if ( packet.p.entities[i].type == 0 && utilities.keysInObject(packet.p.entities[i], ['admin', 'id', 'money']) ) {
             self.logTrainer(
-               packet.entities[i].admin,
-               packet.entities[i].id,
-               packet.entities[i].money
+               packet.p.entities[i].admin,
+               packet.p.entities[i].id,
+               packet.p.entities[i].money
             );
          }
-         if ( packet.entities[i].type == 1 && utilities.keysInObject(entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny']) ) {
-            pokemon = self.findBy(data.pokemon, 'id', packet.entities[i].monsterId);
+         if ( packet.p.entities[i].type == 1 && utilities.keysInObject(packet.p.entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny']) ) {
+            pokemon = self.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
             self.logPokemon(
-               packet.entities[i].id,
-               packet.entities[i].monsterId,
+               packet.p.entities[i].id,
+               packet.p.entities[i].monsterId,
                pokemon.name,
-               packet.entities[i].hp - packet.entities[i].hpt / 100,
+               packet.p.entities[i].hp - packet.p.entities[i].hpt / 100,
                pokemon.rarity,
-               packet.entities[i].shiny
+               packet.p.entities[i].shiny
             );
          }
       }
@@ -48,6 +48,9 @@ window.pokeApi = function(server, utilities, data) {
          'rarity':    rarity,
          'shiny':     shiny
       });
+   };
+   self.getData = function() {
+      return data;
    };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
