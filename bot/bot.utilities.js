@@ -46,7 +46,7 @@ window.botUtilities = function() {
       self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
    };
    self.getCookie = function(name) {
-      var match = document.cookie.match(new RegExp(name + '=([^\;])'));
+      var match = document.cookie.match(new RegExp(name + '=([^\;]*)'));
       return (match ? match['1'] : false);
    };
    self.setCookie = function(name, value) {
