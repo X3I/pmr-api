@@ -1,21 +1,23 @@
 window.pokeApi = function(server, utilities, data, parser) {
    var self       = this;
    self.socket    = false;
+   self.sentCount = 0;
    self.callbacks = {};
-   self.sendCount = 0;
    self.setSocket = function(socket) {
       self.socket = socket;
    };
    self.sendPacket = function(action, packet, callback) {
-      ++self.sendCount;
-      packet.id = 'P' + self.sendCount;
+      packet.id = 'P' + self.sentCount;
       self.socket.send(JSON.stringify({'a': action, 'p': packet}));
-      (callback && (self.callbacks[packet.id] = callback));
+      ++self.sentCount;
+      if ( callback ) {
+         self.callbacks[packet.id] = callback;
+      }
    };
    self.receivePacket = function(packet) {
       packet = JSON.parse(packet);
       if ( 'id' in packet && packet.id in self.callbacks ) {
-         self.callbacks[packet.id](packet.p);
+         self.callbacks[packet.id](packet);
          delete self.callbacks[packet.id];
       }
       else {
