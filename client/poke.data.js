@@ -8,6 +8,8 @@ window.pokeData = function() {
    self.friendRequests  = [];
    self.items           = [];
    self.money           = 0;
+   self.labPokemon      = [];
+   self.labToken        = false;
    self.pokemonList     = [
       {'id': 1, 'name': 'Bulbasaur', 'rarity': 'Super Rare'},
       {'id': 2, 'name': 'Ivysaur', 'rarity': 'Unknown'},
