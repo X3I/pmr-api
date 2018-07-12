@@ -49,7 +49,7 @@ window.pokeParser = function(utilities, data) {
                'rarity':      pokemon.rarity,
                'id':          packet.entities[i].id,
                'monsterId':   packet.entities[i].monsterId,
-               'health':      packet.entities[i].hp / packet.entities[i].hpt * 100,
+               'health':      packet.entities[i].hp,
                'totalHealth': packet.entities[i].hpt,
                'shiny':       packet.entities[i].shiny,
                'x':           packet.entities[i].x,
@@ -101,7 +101,7 @@ window.pokeParser = function(utilities, data) {
       }
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.success && packet.type == 'item' ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
-         (pokemon && (pokemon.health = packet.hp / pokemon.totalHealth * 100));
+         (pokemon && (pokemon.health = packet.hp));
       }
    };
    self.parseFriends = function(packet) {
