@@ -154,8 +154,8 @@ window.pokeParser = function(utilities, data) {
                });
             }
          }
-         data.inventoryPokemon = inventory;
-         data.inventoryToken   = token;
+         data.labPokemon = inventory;
+         data.labToken   = token;
       }
    };
 };
