@@ -13,7 +13,7 @@ window.pokeParser = function(utilities, data) {
                self.parseEquippedPokemon(packet.p);
             break;
             case 'event':
-               self.parseCaughtEvent(packet.p);
+               self.parseEvents(packet.p);
             break;
             case 'f':
                self.parseFriends(packet.p);
@@ -45,17 +45,18 @@ window.pokeParser = function(utilities, data) {
             pokemon = utilities.findBy(data.pokemonList, 'id', packet.entities[i].monsterId);
             utilities.deleteBy(data.pokemon, 'id', packet.entities[i].monsterId);
             (pokemon && data.pokemon.push({
-               'name':      pokemon.name,
-               'rarity':    pokemon.rarity,
-               'id':        packet.entities[i].id,
-               'monsterId': packet.entities[i].monsterId,
-               'health':    packet.entities[i].hp / packet.entities[i].hpt * 100,
-               'shiny':     packet.entities[i].shiny,
-               'x':         packet.entities[i].x,
-               'y':         packet.entities[i].y,
-               'targetX':   packet.entities[i].tx,
-               'targetY':   packet.entities[i].ty,
-               'isWild':    packet.entities[i].id.match(/^m/) ? true : false
+               'name':        pokemon.name,
+               'rarity':      pokemon.rarity,
+               'id':          packet.entities[i].id,
+               'monsterId':   packet.entities[i].monsterId,
+               'health':      packet.entities[i].hp / packet.entities[i].hpt * 100,
+               'totalHealth': packet.entities[i].hpt,
+               'shiny':       packet.entities[i].shiny,
+               'x':           packet.entities[i].x,
+               'y':           packet.entities[i].y,
+               'targetX':     packet.entities[i].tx,
+               'targetY':     packet.entities[i].ty,
+               'isWild':      packet.entities[i].id.match(/^m/) ? true : false
             }));
          }
       }
@@ -88,7 +89,7 @@ window.pokeParser = function(utilities, data) {
       }
       data.equippedPokemon = equipped;
    };
-   self.parseCaughtEvent = function(packet) {
+   self.parseEvents = function(packet) {
       if ( utilities.keysInObject(packet, ['user_id', 'success', 'originator', 'type']) && packet.success && packet.type == 'catch' ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
          (pokemon && data.caughtPokemon.push({
@@ -97,6 +98,10 @@ window.pokeParser = function(utilities, data) {
             'shiny':  pokemon.shiny
          }));
          utilities.deleteBy(data.pokemon, 'id', packet.originator);
+      }
+      else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.success && packet.type == 'item' ) {
+         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
+         (pokemon && (pokemon.health = packet.hp / pokemon.totalHealth * 100));
       }
    };
    self.parseFriends = function(packet) {
