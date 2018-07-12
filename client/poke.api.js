@@ -4,15 +4,12 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.setSocket = function(socket) {
       self.socket = socket;
    };
-   self.sendPacket = function(action, packet, callback) {
-      packet.id = 'P' + self.sentCount + 100000;
-      self.socket.send(JSON.stringify({'a': action, 'p': packet}));
-      ++self.sentCount;
-      if ( callback ) {
-         self.callbacks[packet.id] = callback;
-      }
+   self.sendPacket = function(action, packet) {
+      packet = JSON.stringify({'a': action, 'p': packet});
+      self.socket.send(packet);
    };
    self.receivePacket = function(packet) {
+      packet = JSON.parse(packet);
       parser.parsePacket(packet);
    };
    self.useEmote = function(emote) {
