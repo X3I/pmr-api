@@ -1,9 +1,14 @@
 window.pokeData = function() {
-   var self            = this;
-   self.trainers       = [];
-   self.trainerPokemon = [];
-   self.wildPokemon    = [];
-   self.pokemon        = [
+   var self             = {}
+   self.trainers        = [];
+   self.pokemon         = [];
+   self.equippedPokemon = [];
+   self.caughtPokemon   = [];
+   self.friends         = [];
+   self.friendRequests  = [];
+   self.items           = [];
+   self.money           = 0;
+   self.pokemonList     = [
       {'id': 1, 'name': 'Bulbasaur', 'rarity': 'superrare'},
       {'id': 2, 'name': 'Ivysaur', 'rarity': ''},
       {'id': 3, 'name': 'Venusaur', 'rarity': ''},
@@ -725,5 +730,6 @@ window.pokeData = function() {
       {'id': 719, 'name': 'Diancie', 'rarity': ''},
       {'id': 720, 'name': 'Hoopa', 'rarity': ''},
       {'id': 721, 'name': 'Volcanion', 'rarity': ''}
-   ];   
+   ];
+   self.itemList = [];
 };
