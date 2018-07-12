@@ -21,6 +21,9 @@ window.pokeParser = function(utilities, data) {
             case 'items':
                self.parseItems(packet.p);
             break;
+            case 'npc':
+               self.parseNpcResponse(packet.p);
+            break;
          }
       }
    };
