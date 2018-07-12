@@ -100,8 +100,8 @@ window.pokeParser = function(utilities, data) {
          }));
          utilities.deleteBy(data.pokemon, 'id', packet.originator);
       }
-      else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.success && packet.type == 'item' ) {
-         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
+      else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
+         var pokemon = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
          if ( pokemon ) {
             pokemon.health = packet.hp;
          }
