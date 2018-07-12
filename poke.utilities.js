@@ -1,8 +1,8 @@
 window.pokeUtilities = function() {
    var self           = this;
-   self.arrayInObject = function(object, array) {
-      for ( var i = 0; i < array.length; i++ ) {
-         if ( !(array[i] in object) ) {
+   self.keysInObject = function(object, keys) {
+      for ( var i = 0; i < keys.length; i++ ) {
+         if ( !(keys[i] in object) ) {
             return false;
          }
       }
