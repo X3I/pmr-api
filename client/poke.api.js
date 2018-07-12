@@ -13,7 +13,7 @@ window.pokeApi = function(server, utilities, data, parser) {
    };
    self.receivePacket = function(packet) {
       packet = JSON.parse(packet);
-      if ( utilities.keysInObject(packet, ['id']) && packet.id in self.callbacks ) {
+      if ( 'id' in packet && packet.id in self.callbacks ) {
          self.callbacks[packet.id](packet.p);
          delete self.callbacks[packet.id];
       }
