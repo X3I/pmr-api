@@ -1,8 +1,6 @@
 window.pokeApi = function(server, utilities, data, parser) {
    var self       = this;
    self.socket    = false;
-   self.sentCount = 0;
-   self.callbacks = {};
    self.setSocket = function(socket) {
       self.socket = socket;
    };
@@ -15,14 +13,7 @@ window.pokeApi = function(server, utilities, data, parser) {
       }
    };
    self.receivePacket = function(packet) {
-      packet = JSON.parse(packet);
-      if ( 'id' in packet && packet.id in self.callbacks ) {
-         self.callbacks[packet.id](packet);
-         delete self.callbacks[packet.id];
-      }
-      else {
-         parser.parsePacket(packet);
-      }
+      parser.parsePacket(packet);
    };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
