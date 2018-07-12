@@ -82,14 +82,14 @@ window.pokeApi = function(server, utilities, data, parser) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'sendout'}));
    };
-   self.sendoutAllPokemon = function() {
-      for ( var i = 0; i < data.equippedPokemon.length; i++ ) {
-         self.sendoutEquippedPokemon(data.equippedPokemon.position);
-      }
-   };
    self.widthdrawEquippedPokemon = function() {
       for ( var i = 0; i < data.equippedPokemon.length; i++ ) {
          self.withdrawPokemon(data.equippedPokemon.position);
+      }
+   };
+   self.sendoutEquippedPokemon = function() {
+      for ( var i = 0; i < data.equippedPokemon.length; i++ ) {
+         self.sendoutPokemon(data.equippedPokemon.position);
       }
    };
    self.evolvePokemon = function(position) {
