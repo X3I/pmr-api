@@ -139,21 +139,20 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseNpcResponse = function(packet) {
       if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
-         console.log(packet.lines['1'].storage);
-         for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
+         for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, keys = Object.keys(packestorage), token = packet.lines['1'].token, i = 0; i < keys.length; i++ ) {
             if ( utilities.keysInObject(storage[i], ['pk' ,'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef']) ) {
-               pokemon = utilities.findBy(data.pokemon, 'id', storage[i].pokemon_id);
+               pokemon = utilities.findBy(data.pokemon, 'id', storage[keys[i]].pokemon_id);
                (pokemon && inventory.push({
                   'rarity':         pokemon.rarity,
-                  'id':             storage[i].pk,
-                  'monsterId':      storage[i].pokemon_id,
-                  'isSpecial':      storage[i].special,
-                  'isStarter':      storage[i].is_starter,
-                  'attack':         storage[i].iv_atk,
-                  'speed':          storage[i].iv_spd,
-                  'defence':        storage[i].iv_def,
-                  'specialAttack':  storage[i].iv_spatk,
-                  'specialDefence': storage[i].iv_spdef
+                  'id':             storage[keys[i]].pk,
+                  'monsterId':      storage[keys[i]].pokemon_id,
+                  'isSpecial':      storage[keys[i]].special,
+                  'isStarter':      storage[keys[i]].is_starter,
+                  'attack':         storage[keys[i]].iv_atk,
+                  'speed':          storage[keys[i]].iv_spd,
+                  'defence':        storage[keys[i]].iv_def,
+                  'specialAttack':  storage[keys[i]].iv_spatk,
+                  'specialDefence': storage[keys[i]].iv_spdef
                }));
             }
          }
