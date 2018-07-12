@@ -139,6 +139,7 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseNpcResponse = function(packet) {
       if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
+         console.log(packet.lines['1'].storage);
          for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
             if ( utilities.keysInObject(storage[i], ['pk' ,'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef']) ) {
                pokemon = utilities.findBy(data.pokemon, 'id', storage[i].pokemon_id);
