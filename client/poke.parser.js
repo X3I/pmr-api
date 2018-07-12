@@ -102,7 +102,9 @@ window.pokeParser = function(utilities, data) {
       }
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.success && packet.type == 'item' ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
-         (pokemon && (pokemon.health = packet.hp));
+         if ( pokemon ) {
+            pokemon.health = packet.hp;
+         }
       }
    };
    self.parseFriends = function(packet) {
