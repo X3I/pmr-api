@@ -8,7 +8,9 @@ window.botApi = function(utilities, data, socket) {
          self.sendPacket('auth', {'token': token}, callback);
       }
       else {
-         self.authenticate(token, callback);
+         setTimeout(function() {
+            self.authenticate(token, callback);
+         }, 1000);
       }
    };
    self.useEmote = function(emote) {
