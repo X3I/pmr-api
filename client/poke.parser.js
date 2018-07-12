@@ -8,19 +8,19 @@ window.pokeParser = function(utilities, data) {
                self.parseEntities(packet.p);
             break;
             case 't':
-               self.parseEntityTargetChange(packet.p);
+               //self.parseEntityTargetChange(packet.p);
             break;
             case 'team':
-               self.parseEquippedPokemon(packet.p);
+               //self.parseEquippedPokemon(packet.p);
             break;
             case 'event':
-               self.parseCaughtEvent(packet.p);
+               //self.parseCaughtEvent(packet.p);
             break;
             case 'f':
-               self.parseFriends(packet.p);
+               //self.parseFriends(packet.p);
             break;
             case 'items':
-               self.parseItems(packet.p);
+               //self.parseItems(packet.p);
             break;
          }
       }
@@ -58,6 +58,7 @@ window.pokeParser = function(utilities, data) {
          }
       }
    };
+   /*
    self.parseEntityTargetChange = function(packet) {
       if ( utilities.keysInObject(packet.source, ['id' 'x', 'y', 'tx', 'ty']) ) {
          var entity = utilities.findBy(data.pokemon, 'id', packet.source.id) || utilities.findBy(data.trainers, 'name', packet.source.id);
@@ -131,4 +132,5 @@ window.pokeParser = function(utilities, data) {
       data.items = items;
       data.money = packet.money;
    };
+   */
 };
