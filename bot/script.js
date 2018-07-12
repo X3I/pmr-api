@@ -3,5 +3,5 @@ window.botScript = function(server, modifications) {
    var data      = new window.botData();
    var socket    = new window.botSocket(server, utilities, data);
    var api       = new window.botApi(utilities, data, socket);
-   modifications(utilities, data, api);
+   modifications(utilities, data, socket, api);
 };
