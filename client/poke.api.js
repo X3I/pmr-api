@@ -18,6 +18,9 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.speakToNpc = function(npc) {
       self.sendPacket('action', {'npc': npc});
    };
+   self.sellLabPokemon = function(pokemonIds) {
+      self.sendPacket('lab', {'token': data.labToken, 'lab', pokemonIds});
+   };
    self.moveAvatar = function(x, y) {
       self.sendPacket('target', {'x': x, 'y': y});
    };
