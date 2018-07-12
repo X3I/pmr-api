@@ -1,3 +1,4 @@
+/*
 window.pokeParser = function(utilities, data) {
    var self         = this;
    self.parsePacket = function(packet) {
@@ -132,3 +133,4 @@ window.pokeParser = function(utilities, data) {
       data.money = packet.money;
    };
 };
+*/
