@@ -1,8 +1,13 @@
 window.pokeParser = function(utilities, data) {
    var self         = this;
+   self.callbacks   = {};
    self.parsePacket = function(packet) {
       packet = JSON.parse(packet);
-      if ( utilities.keysInObject(packet, ['a', 'p']) ) {
+      if ( utilities.keysInObject(packet, ['id']) && packet.id in self.callbacks ) {
+         self.callbacks[packet.id](packet.p);
+         delete self.callbacks[packet.id];
+      }
+      else if ( utilities.keysInObject(packet, ['a', 'p']) ) {
          switch ( packet.a ) {
             case 'ent':
                self.parseEntities(packet.p);
