@@ -7,7 +7,7 @@ window.pokeApi = function(server, utilities, data, parser) {
       self.socket = socket;
    };
    self.sendPacket = function(action, packet, callback) {
-      packet.id = 'PP' + self.sendCount;
+      packet.id = 'P' + self.sendCount;
       (++self.sendCount && self.socket.send(JSON.stringify({'a': action, 'p': packet})));
       (callback && (self.callbacks[packet.id] = callback));
    };
