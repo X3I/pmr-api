@@ -45,4 +45,7 @@ window.botUtilities = function() {
    self.postRequest = function(url, post, callback) {
       self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
    };
+   self.deletePhpSession = function() {
+      document.cookie = 'PHPSESSID=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+   };
 };
