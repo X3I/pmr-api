@@ -54,7 +54,8 @@ window.pokeApi = function(server, utilities, data, parser) {
    };
    self.tradeItem = function(name) {
       var item = utilities.findBy(data.itemList, 'name', name);
-      (item && item.quantity > 0 && --item.quantity && self.sendPacket('trade_update', {'action': 'item_add', 'pk': item.id}));
+      (item && item.quantity > 0 && self.sendPacket('trade_update', {'action': 'item_add', 'pk': item.id}));
+      --item.quantity;
    };
    self.tradePokemon = function(position) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
@@ -78,8 +79,8 @@ window.pokeApi = function(server, utilities, data, parser) {
    };
    self.usePokeBall = function(name, id) {
       var item = utilities.findBy(data.itemList, 'name', name);
-      (item && item.quantity > 0 && --item.quantity && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
-      console.log(item && item.quantity > 0 && (--item.quantity));
+      (item && item.quantity > 0 && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
+      --item.quantity;
    };
    utilities.interceptSocket(server, self.setSocket, parser.parsePacket);
 };
