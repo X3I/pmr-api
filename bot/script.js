@@ -4,7 +4,7 @@ window.botScript = function(username, password, server, modifications) {
    var socket    = new window.botSocket(server, utilities, data);
    var api       = new window.botApi(utilities, data, socket);
    api.login(username, password, function(token) {
-      console.log('bot logged in!' + token);
+      console.log('bot logged in!');
       api.authenticate(token, function() {
          console.log('bot authenticated!');
          modifications(utilities, data, socket, api);
