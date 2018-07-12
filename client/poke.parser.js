@@ -157,7 +157,7 @@ window.pokeParser = function(utilities, data) {
                   'specialAttack':  storage[i].iv_spatk,
                   'specialDefence': storage[i].iv_spdef,
                   'price':          storage[i].market_price,
-                  'totalStats':     utilities.sumKeys(storage[i], ['attack', 'speed', 'defence', 'specialAttack', 'specialDefence'])
+                  'totalStats':     utilities.sumKeys(storage[i], ['iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef'])
                }));
             }
          }
