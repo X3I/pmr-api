@@ -7,9 +7,9 @@ window.botScript = function(username, password, server, modifications) {
    api.login(username, password, function(token) {
       console.log('bot logged in!');
       api.authenticate(token, function() {
+         document.cookie = cookies;
          console.log('bot authenticated!');
          modifications(utilities, data, socket, api);
-         document.cookie = cookies;
       });
    });
 };
