@@ -79,7 +79,7 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.usePokeBall = function(name, id) {
       var item = utilities.findBy(data.itemList, 'name', name);
       (item && item.quantity > 0 && --item.quantity && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
-      console.log(item && item.quantity > 0 && --item.quantity);
+      console.log(item && item.quantity > 0 && (--item.quantity));
    };
    utilities.interceptSocket(server, self.setSocket, parser.parsePacket);
 };
