@@ -13,9 +13,6 @@ window.botApi = function(utilities, data, socket) {
    self.authenticate = function(token, callback) {
       self.sendPacket('auth', {'token': token}, callback);
    };
-   self.getTrainerPokemon = function(id, callback) {
-      self.sendPacket('info', {'user': id}, callback);
-   };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
