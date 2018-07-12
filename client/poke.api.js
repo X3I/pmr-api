@@ -72,7 +72,7 @@ window.pokeApi = function(server, utilities, data, parser) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       (pokemon && self.sendPacket('evo', {'pk': pokemon.id, 'from': pokemon.monsterId, 'to': pokemon.monsterId + 1}));
    };
-   self.changeAttack = function(position, attackNumber) {
+   self.changePokemonAttack = function(position, attackNumber) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       (pokemon && self.sendPacket('skill', {'pk': pokemon.id, 'index': attackNumber - 1}));
    };
