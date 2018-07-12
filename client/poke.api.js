@@ -1,8 +1,8 @@
 window.pokeApi = function(server, utilities, data, parser) {
    var self       = this;
    self.socket    = false;
-   self.sendCount = 0;
    self.callbacks = {};
+   self.sendCount = 0;
    self.setSocket = function(socket) {
       self.socket = socket;
    };
