@@ -1,26 +1,25 @@
-/*
 window.pokeParser = function(utilities, data) {
    var self         = this;
    self.parsePacket = function(packet) {
       packet = JSON.parse(packet);
       if ( utilities.keysInObject(packet, ['a', 'p']) ) {
          switch ( packet.a ) {
-            case 'ent';
+            case 'ent':
                self.parseEntities(packet.p);
             break;
-            case 't';
+            case 't':
                self.parseEntityTargetChange(packet.p);
             break;
-            case 'team';
+            case 'team':
                self.parseEquippedPokemon(packet.p);
             break;
-            case 'event';
+            case 'event':
                self.parseCaughtEvent(packet.p);
             break;
-            case 'f';
+            case 'f':
                self.parseFriends(packet.p);
             break;
-            case 'items';
+            case 'items':
                self.parseItems(packet.p);
             break;
          }
@@ -133,4 +132,3 @@ window.pokeParser = function(utilities, data) {
       data.money = packet.money;
    };
 };
-*/
