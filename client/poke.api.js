@@ -15,9 +15,6 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
-   self.speakToNpc = function(npc) {
-      self.sendPacket('action', {'npc': npc});
-   };
    self.sellLabPokemon = function(pokemonIds) {
       self.sendPacket('lab', {'token': data.labToken, 'lab': pokemonIds});
    };
@@ -87,6 +84,11 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.usePokeBall = function(name, id) {
       var item = utilities.findBy(data.items, 'name', name);
       (item && item.quantity > 0 && --item.quantity && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
+   };
+   self.useItem = function(position, name) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      var item    = utilities.findBy(data.items, 'name', name);
+      (pokemon && item && --item.quantity && self.sendPacket('item', {'t': pokemon.id,'i': item.id}));
    };
    utilities.interceptSocket(server, self.setSocket, self.receivePacket);
 };
