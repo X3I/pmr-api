@@ -13,6 +13,11 @@ window.botApi = function(utilities, data, socket) {
    self.authenticate = function(token, callback) {
       self.sendPacket('auth', {'token': token}, callback);
    };
+   self.getTrainerPokemon = function(id) {
+      self.sendPacket('info', {'name': id}, function(data) {
+         console.log(data);
+      });
+   };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
