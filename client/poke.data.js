@@ -1,5 +1,5 @@
 window.pokeData = function() {
-   var self             = {};
+   var self             = this;
    self.trainers        = [];
    self.pokemon         = [];
    self.equippedPokemon = [];
@@ -731,5 +731,27 @@ window.pokeData = function() {
       {'id': 720, 'name': 'Hoopa', 'rarity': ''},
       {'id': 721, 'name': 'Volcanion', 'rarity': ''}
    ];
-   self.itemList = [];
+   self.itemList = [
+      {'id': 1,   'name': 'Master Ball',   'price': 100000},
+      {'id': 2,   'name': 'Ultra Ball',    'price': 1200},
+      {'id': 3,   'name': 'Great Ball',    'price': 600},
+      {'id': 4,   'name': 'Poke Ball',     'price': 200},
+      {'id': 17,  'name': 'Potion',        'price': 300},
+      {'id': 18,  'name': 'Antidote',      'price': 100},
+      {'id': 19,  'name': 'Burn Heal',     'price': 250},
+      {'id': 20,  'name': 'Ice Heal',      'price': 250},
+      {'id': 28,  'name': 'Revive',        'price': 1500},
+      {'id': 29,  'name': 'Max Revive',    'price': 4000},
+      {'id': 80,  'name': 'Sun Stone',     'price': 8000},
+      {'id': 81,  'name': 'Moon Stone',    'price': 8000},
+      {'id': 82,  'name': 'Fire Stone',    'price': 8000},
+      {'id': 83,  'name': 'Thunder Stone', 'price': 8000},
+      {'id': 84,  'name': 'Water Stone',   'price': 8000},
+      {'id': 85,  'name': 'Leaf Stone',    'price': 8000},
+      {'id': 107, 'name': 'Shiny Stone',   'price': 8000},
+      {'id': 108, 'name': 'Dusk Stone',    'price': 8000},
+      {'id': 109, 'name': 'Dawn Stone',    'price': 8000},
+      {'id': 811, 'name': 'Ice Stone',     'price': 8000},
+      {'id': 812, 'name': 'Moss Stone',    'price': 8000}
+   ];
 };
