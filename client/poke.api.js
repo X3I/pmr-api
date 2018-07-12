@@ -54,7 +54,7 @@ window.pokeApi = function(server, utilities, data, parser) {
    };
    self.tradeItem = function(name) {
       var item = utilities.findBy(data.itemList, 'name', name);
-      (item && --item.quantity && self.sendPacket('trade_update', {'action': 'item_add', 'pk': item.id}));
+      (item && item.quantity > 0 && --item.quantity && self.sendPacket('trade_update', {'action': 'item_add', 'pk': item.id}));
    };
    self.tradePokemon = function(position) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
