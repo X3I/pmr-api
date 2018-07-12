@@ -1,4 +1,4 @@
-window.botScript = function(username, password, server, modifications) {
+window.botScript = function(server, modifications) {
    var utilities = new window.botUtilities();
    var data      = new window.botData();
    var socket    = new window.botSocket(server, utilities, data);
