@@ -60,13 +60,13 @@ window.pokeApi = function(server, utilities, data, parser) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       (pokemon && self.sendPacket('trade_update', {'action': 'pokemon_add', 'pk': pokemon.id}));
    };
-   self.withdrawPokemon = function(position) {
-      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
-      (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'withdraw'}));
-   };
    self.sendoutPokemon = function(position) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'sendout'}));
+   };
+   self.withdrawPokemon = function(position) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'withdraw'}));
    };
    self.evolvePokemon = function(position) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
