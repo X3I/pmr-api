@@ -43,8 +43,6 @@ window.botUtilities = function() {
       request.send(post);
    };
    self.postRequest = function(url, post, callback) {
-      var cookies = document.cookie;
       self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
-      document.cookie = cookies;
    };
 };
