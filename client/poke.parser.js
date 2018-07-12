@@ -8,19 +8,19 @@ window.pokeParser = function(utilities, data) {
                self.parseEntities(packet.p);
             break;
             case 't':
-               //self.parseEntityTargetChange(packet.p);
+               self.parseEntityTargetChange(packet.p);
             break;
             case 'team':
-               //self.parseEquippedPokemon(packet.p);
+               self.parseEquippedPokemon(packet.p);
             break;
             case 'event':
-               //self.parseCaughtEvent(packet.p);
+               self.parseCaughtEvent(packet.p);
             break;
             case 'f':
-               //self.parseFriends(packet.p);
+               self.parseFriends(packet.p);
             break;
             case 'items':
-               //self.parseItems(packet.p);
+               self.parseItems(packet.p);
             break;
          }
       }
@@ -42,7 +42,7 @@ window.pokeParser = function(utilities, data) {
          else if ( utilities.keysInObject(packet.entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny', 'x', 'y', 'tx', 'ty']) ) {
             pokemon = utilities.findBy(data.pokemonList, 'id', packet.entities[i].monsterId);
             utilities.deleteBy(data.pokemon, 'id', packet.entities[i].monsterId);
-            data.pokemon.push({
+            (pokemon && data.pokemon.push({
                'name':      pokemon.name,
                'rarity':    pokemon.rarity,
                'id':        packet.entities[i].id,
@@ -54,13 +54,12 @@ window.pokeParser = function(utilities, data) {
                'targetX':   packet.entities[i].tx,
                'targetY':   packet.entities[i].ty,
                'isWild':    packet.entities[i].id.match(/^m/)
-            });
+            }));
          }
       }
    };
-   /*
    self.parseEntityTargetChange = function(packet) {
-      if ( utilities.keysInObject(packet.source, ['id' 'x', 'y', 'tx', 'ty']) ) {
+      if ( utilities.keysInObject(packet.source, ['id', 'x', 'y', 'tx', 'ty']) ) {
          var entity = utilities.findBy(data.pokemon, 'id', packet.source.id) || utilities.findBy(data.trainers, 'name', packet.source.id);
          if ( entity ) {
             entity.x       = packet.source.x;
@@ -74,7 +73,7 @@ window.pokeParser = function(utilities, data) {
       for ( var pokemon = false, equipped = [], keys = Object.keys(packet), i = 0; i < keys.length; i++ ) {
          if ( utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total']) ) {
             pokemon = utilities.findBy(data.pokemonList, 'id', packet[keys[i]].pokemon_id);
-            equipped.push({
+            (pokemon && equipped.push({
                'name':      pokemon.name,
                'rarity':    pokemon.rarity,
                'id':        packet[keys[i]].pk,
@@ -82,7 +81,7 @@ window.pokeParser = function(utilities, data) {
                'position':  packet[keys[i]].position,
                'level':     packet[keys[i]].level,
                'health':    packet[keys[i]].hp_left / packet[keys[i]].hp_total * 100
-            })
+            }));
          }
       }
       data.equippedPokemon = equipped;
@@ -90,11 +89,11 @@ window.pokeParser = function(utilities, data) {
    self.parseCaughtEvent = function(packet) {
       if ( utilities.keysInObject(packet, ['user_id', 'success', 'originator', 'type']) && packet.success && packet.type == 'catch' ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
-         data.caughtPokemon.push({
+         (pokemon && data.caughtPokemon.push({
             'name':   pokemon.name,
             'rarity': pokemon.rarity,
             'shiny':  pokemon.shiny
-         });
+         }));
          utilities.deleteBy(data.pokemon, 'id', packet.originator);
       }
    };
@@ -123,14 +122,17 @@ window.pokeParser = function(utilities, data) {
    self.parseItems = function(packet) {
       for ( var items = [], i = 0; i < packet.items.length; i++ ) {
          if ( utilities.keysInObject(packet.items[i], ['item_id', 'quantity']) ) {
-            items.push({
-               'id':       packet.items[i].item_id,
-               'quantity': packet.items[i].quantity
-            });
+            item = utilities.findBy(data.itemList, 'id', packet.items[i].item_id);
+            (item && items.push({
+               'id':       item.id,
+               'name':     item.name,
+               'price':    item.price,
+               'quantity': packet.items[i].quantity,
+               'worth':    packet.items[i].quantity * item.price
+            }));
          }
       }
       data.items = items;
       data.money = packet.money;
    };
-   */
 };
