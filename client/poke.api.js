@@ -10,20 +10,14 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
+   self.speakToNpc = function(npc) {
+      self.sendPacket('action', {'npc': npc});
+   };
    self.moveAvatar = function(x, y) {
       self.sendPacket('target', {'x': x, 'y': y});
    };
    self.addFriend = function(username) {
       self.sendPacket('friend_request', {'name': username});
-   };
-   self.privateMessage = function(username, text) {
-      self.sendPacket('message', {'chatroom': '1', 'text': '/pm' + ' ' + username + ' ' + text});
-   };
-   self.globalMessage = function(text) {
-      self.sendPacket('message', {'chatroom': '1', 'text': text});
-   };
-   self.guildMessage = function(text) {
-      self.sendPacket('message', {'chatroom': 'P', 'text': text});
    };
    self.tradeRequest = function(username) {
       self.sendPacket('trade_request', {'name': username});
@@ -46,32 +40,14 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.acceptTrade = function() {
       self.sendPacket('trade_update', {'action': 'accept'});
    };
-   self.speakToNpc = function(npc) {
-      self.sendPacket('action', {'npc': npc});
+   self.privateMessage = function(username, text) {
+      self.sendPacket('message', {'chatroom': '1', 'text': '/pm' + ' ' + username + ' ' + text});
    };
-   self.useMasterBall = function(target) {
-      self.sendPacket('pokeball', {'t': target, 'i': 1});
+   self.globalMessage = function(text) {
+      self.sendPacket('message', {'chatroom': '1', 'text': text});
    };
-   self.useUltraBall = function(target) {
-      self.sendPacket('pokeball', {'t': target, 'i': 2});
-   };
-   self.useGreatBall = function(target) {
-      self.sendPacket('pokeball', {'t': target, 'i': 3});
-   };
-   self.usePokeBall = function(target) {
-      self.sendPacket('pokeball', {'t': target, 'i': 4});
-   };
-   self.withdrawPokemon = function(position, id) {
-      self.sendPacket('call', {'position': position, 'pk': id, 'action': 'withdraw'});
-   };
-   self.sendoutPokemon = function(position, id) {
-      self.sendPacket('call', {'position': position, 'pk': id, 'action': 'sendout'});
-   };
-   self.evolvePokemon = function(id, from, to) {
-      self.sendPacket('evo', {'pk': id, 'from': from, 'to': to});
-   };
-   self.changeSkill = function(id, index) {
-      self.sendPacket('skill', {'pk': id, 'index': index});
+   self.guildMessage = function(text) {
+      self.sendPacket('message', {'chatroom': 'P', 'text': text});
    };
    self.guildInvite = function(username) {
       self.sendPacket('guildInvite', {'name': username});
@@ -79,8 +55,40 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.guildUpdate = function(id, name, description, color) {
       self.sendPacket('guildUpdate', {'guild_id': id, 'guild_name': name, 'guild_description': description, 'guild_color': color});
    };
-   self.guildUpdate = function(money) {
+   self.guildMoney = function(money) {
       self.sendPacket('guildTransferMoney', {'money': money});
+   };
+   self.useMasterBall = function(target) {
+      var item = utilities.findBy(data.itemList, 'name', 'Master Ball');
+      (item && item.quantity > 0 && self.sendPacket('pokeball', {'t': target, 'i': item.id}));
+   };
+   self.useUltraBall = function(target) {
+      var item = utilities.findBy(data.itemList, 'name', 'Ultra Ball');
+      (item && item.quantity > 0 && self.sendPacket('pokeball', {'t': target, 'i': item.id}));
+   };
+   self.useGreatBall = function(target) {
+      var item = utilities.findBy(data.itemList, 'name', 'Great Ball');
+      (item && item.quantity > 0 && self.sendPacket('pokeball', {'t': target, 'i': item.id}));
+   };
+   self.usePokeBall = function(target) {
+      var item = utilities.findBy(data.itemList, 'name', 'Poke Ball');
+      (item && item.quantity > 0 && self.sendPacket('pokeball', {'t': target, 'i': item.id}));
+   };
+   self.withdrawPokemon = function(position) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'withdraw'}));
+   };
+   self.sendoutPokemon = function(position) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'sendout'}));
+   };
+   self.evolvePokemon = function(position) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      (pokemon && self.sendPacket('evo', {'pk': pokemon.id, 'from': pokemon.monsterId, 'to': pokemon.monsterId + 1}));
+   };
+   self.changeSkill = function(position, index) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      (pokemon && self.sendPacket('skill', {'pk': pokemon.id, 'index': index}));
    };
    utilities.interceptSocket(server, self.setSocket, parser.parsePacket);
 };
