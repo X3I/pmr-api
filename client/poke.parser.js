@@ -1,6 +1,5 @@
 window.pokeParser = function(utilities, data) {
    var self         = this;
-   self.callbacks   = {};
    self.parsePacket = function(packet) {
       packet = JSON.parse(packet);
       if ( utilities.keysInObject(packet, ['a', 'p']) ) {
