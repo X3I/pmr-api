@@ -139,20 +139,24 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseNpcResponse = function(packet) {
       if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
-         for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, keys = Object.keys(storage), token = packet.lines['1'].token, i = 0; i < keys.length; i++ ) {
-            if ( utilities.keysInObject(storage[i], ['pk' ,'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef']) ) {
-               pokemon = utilities.findBy(data.pokemon, 'id', storage[keys[i]].pokemon_id);
+         var storeage = packet.lines['1'].storage;
+         var token    = packet.lines['1'].token;
+         for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
+            if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price']) ) {
+               pokemon = utilities.findBy(data.pokemonList, 'id', storage[i].pokemon_id);
                (pokemon && inventory.push({
                   'rarity':         pokemon.rarity,
-                  'id':             storage[keys[i]].pk,
-                  'monsterId':      storage[keys[i]].pokemon_id,
-                  'isSpecial':      storage[keys[i]].special,
-                  'isStarter':      storage[keys[i]].is_starter,
-                  'attack':         storage[keys[i]].iv_atk,
-                  'speed':          storage[keys[i]].iv_spd,
-                  'defence':        storage[keys[i]].iv_def,
-                  'specialAttack':  storage[keys[i]].iv_spatk,
-                  'specialDefence': storage[keys[i]].iv_spdef
+                  'id':             storage[i].pk,
+                  'monsterId':      storage[i].pokemon_id,
+                  'name':           storage[i].name,
+                  'isSpecial':      storage[i].special,
+                  'isStarter':      storage[i].is_starter,
+                  'attack':         storage[i].iv_atk,
+                  'speed':          storage[i].iv_spd,
+                  'defence':        storage[i].iv_def,
+                  'specialAttack':  storage[i].iv_spatk,
+                  'specialDefence': storage[i].iv_spdef,
+                  'price':          storage[i].market_price
                }));
             }
          }
