@@ -88,7 +88,12 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.useItem = function(position, name) {
       var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
       var item    = utilities.findBy(data.items, 'name', name);
-      (pokemon && item && --item.quantity && self.sendPacket('item', {'t': 'p' + pokemon.id,'i': item.id}));
+      (pokemon && item && item.quantity > 0 && --item.quantity && self.sendPacket('item', {'t': 'p' + pokemon.id,'i': item.id}));
+   };
+   self.revivePokemon = function(position, name) {
+      var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+      var item    = utilities.findBy(data.items, 'name', name);
+      (pokemon && item && item.quantity > 0 && --item.quantity && self.sendPacket('revive', {'t': pokemon.id,'i': item.id}));
    };
    utilities.interceptSocket(server, self.setSocket, self.receivePacket);
 };
