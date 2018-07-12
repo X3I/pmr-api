@@ -138,7 +138,7 @@ window.pokeParser = function(utilities, data) {
       data.money = packet.money;
    };
    self.parseNpcResponse = function(packet) {
-      if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
+      if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
          var storeage = packet.lines['1'].storage;
          var token    = packet.lines['1'].token;
          for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
