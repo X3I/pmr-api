@@ -1,5 +1,5 @@
 window.pokeData = function() {
-   var self             = {}
+   var self             = {};
    self.trainers        = [];
    self.pokemon         = [];
    self.equippedPokemon = [];
