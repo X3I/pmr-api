@@ -134,4 +134,25 @@ window.pokeParser = function(utilities, data) {
       data.items = items;
       data.money = packet.money;
    };
+	self.parseNpcResponse = function(packet) {
+	   if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
+	      for ( var inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
+	      	if ( utilities.keysInObject(storage[i], ['pk' ,'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef']) ) {
+		         inventory.push({
+						'id':             storage[i].pk,
+						'monsterId':      storage[i].pokemon_id,
+						'isSpecial':      storage[i].special,
+						'isStarter':      storage[i].is_starter,
+						'attack':         storage[i].iv_atk,
+						'speed':          storage[i].iv_spd,
+						'defence':        storage[i].iv_def,
+						'specialAttack':  storage[i].iv_spatk,
+						'specialDefence': storage[i].iv_spdef
+		         });
+	      	}
+	      }
+	      data.inventoryPokemon = inventory;
+	      data.inventoryToken   = token;
+	   }
+	};
 };
