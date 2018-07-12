@@ -77,13 +77,14 @@ window.pokeParser = function(utilities, data) {
          if ( utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total']) ) {
             pokemon = utilities.findBy(data.pokemonList, 'id', packet[keys[i]].pokemon_id);
             (pokemon && equipped.push({
-               'name':      pokemon.name,
-               'rarity':    pokemon.rarity,
-               'id':        packet[keys[i]].pk,
-               'monsterId': packet[keys[i]].pokemon_id,
-               'position':  packet[keys[i]].position,
-               'level':     packet[keys[i]].level,
-               'health':    packet[keys[i]].hp_left / packet[keys[i]].hp_total * 100
+               'name':        pokemon.name,
+               'rarity':      pokemon.rarity,
+               'id':          packet[keys[i]].pk,
+               'monsterId':   packet[keys[i]].pokemon_id,
+               'position':    packet[keys[i]].position,
+               'level':       packet[keys[i]].level,
+               'health':      packet[keys[i]].hp_left,
+               'totalHealth': packet[keys[i]].hp_total
             }));
          }
       }
