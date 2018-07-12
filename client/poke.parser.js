@@ -142,7 +142,7 @@ window.pokeParser = function(utilities, data) {
          var storeage = packet.lines['1'].storage;
          var token    = packet.lines['1'].token;
          for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
-            if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price']) ) {
+            if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price', 'level']) ) {
                pokemon = utilities.findBy(data.pokemonList, 'id', storage[i].pokemon_id);
                (pokemon && inventory.push({
                   'rarity':         pokemon.rarity,
@@ -157,6 +157,7 @@ window.pokeParser = function(utilities, data) {
                   'specialAttack':  storage[i].iv_spatk,
                   'specialDefence': storage[i].iv_spdef,
                   'price':          storage[i].market_price,
+                  'level':          storage[i].level,
                   'totalStats':     utilities.sumKeys(storage[i], ['iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef'])
                }));
             }
