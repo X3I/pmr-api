@@ -1,4 +1,4 @@
-window.pokeApi = function(server, utilities, data) {
+window.pokeApi = function(server, utilities, data, parser) {
    var self       = this;
    self.socket    = false;
    self.setSocket = function(socket) {
@@ -124,5 +124,5 @@ window.pokeApi = function(server, utilities, data) {
    self.guildUpdate = function(money) {
       self.sendPacket('guildTransferMoney', {'money': money});
    };
-   utilities.interceptSocket(server, self.setSocket, self.parsePacket);
+   utilities.interceptSocket(server, self.setSocket, parser.parsePacket);
 };
