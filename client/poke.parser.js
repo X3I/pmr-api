@@ -139,9 +139,11 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseNpcResponse = function(packet) {
       if ( utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
-         for ( var inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
+         for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
             if ( utilities.keysInObject(storage[i], ['pk' ,'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef']) ) {
-               inventory.push({
+               pokemon = utilities.findBy(data.pokemon, 'id', storage[i].pokemon_id);
+               (pokemon && inventory.push({
+                  'rarity':         pokemon.rarity,
                   'id':             storage[i].pk,
                   'monsterId':      storage[i].pokemon_id,
                   'isSpecial':      storage[i].special,
@@ -151,7 +153,7 @@ window.pokeParser = function(utilities, data) {
                   'defence':        storage[i].iv_def,
                   'specialAttack':  storage[i].iv_spatk,
                   'specialDefence': storage[i].iv_spdef
-               });
+               }));
             }
          }
          data.labPokemon = inventory;
