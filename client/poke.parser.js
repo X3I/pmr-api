@@ -53,7 +53,7 @@ window.pokeParser = function(utilities, data) {
                'y':         packet.entities[i].y,
                'targetX':   packet.entities[i].tx,
                'targetY':   packet.entities[i].ty,
-               'isWild':    packet.entities[i].id.match(/^m/)
+               'isWild':    packet.entities[i].id.match(/^m/) ? true : false
             }));
          }
       }
