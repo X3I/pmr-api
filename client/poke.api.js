@@ -1,15 +1,25 @@
 window.pokeApi = function(server, utilities, data, parser) {
    var self       = this;
    self.socket    = false;
-   self.sentCount = 0;
+   self.sendCount = 0;
    self.callbacks = {};
    self.setSocket = function(socket) {
       self.socket = socket;
    };
    self.sendPacket = function(action, packet, callback) {
-      packet.id = 'PP' + self.sentCount;
-      (++self.sentCount && self.socket.send(JSON.stringify({'a': action, 'p': packet})));
+      packet.id = 'PP' + self.sendCount;
+      (++self.sendCount && self.socket.send(JSON.stringify({'a': action, 'p': packet})));
       (callback && (self.callbacks[packet.id] = callback));
+   };
+   self.receivePacket = function(packet) {
+      packet = JSON.parse(packet);
+      if ( utilities.keysInObject(packet, ['id']) && packet.id in self.callbacks ) {
+         self.callbacks[packet.id](packet.p);
+         delete self.callbacks[packet.id];
+      }
+      else {
+         parser.parsePacket(packet);
+      }
    };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
@@ -84,5 +94,5 @@ window.pokeApi = function(server, utilities, data, parser) {
       var item = utilities.findBy(data.items, 'name', name);
       (item && item.quantity > 0 && --item.quantity && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
    };
-   utilities.interceptSocket(server, self.setSocket, parser.parsePacket);
+   utilities.interceptSocket(server, self.setSocket, self.receivePacket);
 };
