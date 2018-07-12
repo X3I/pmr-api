@@ -3,5 +3,5 @@ window.pokeScript = function(server, modifications) {
    var data      = new window.pokeData();
    var parser    = new pokeParser(utilities, data);
    var api       = new window.pokeApi(server, utilities, data, parser);
-   modifications(utilities, data, api);
+   modifications(utilities, data, api, parser);
 };
