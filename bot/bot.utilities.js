@@ -31,26 +31,6 @@ window.botUtilities = function() {
       }
       return query.slice(0, -1);
    };
-   self.blockCookies = function() {
-      if ( document.__defineGetter__ !== undefined ) {
-         document.__defineGetter__('cookie', function() {
-            return '';
-         });
-         document.__defineSetter__('cookie', function() {
-            return true
-         });
-      }
-      else {
-         Object.defineProperty(document, 'cookie', {
-            get: function(){
-               return ''
-            },
-            set: function(){
-               return true
-            }
-         });
-      }
-   };
    self.httpRequest = function(method, url, headers, post, callback) {
       var request = new XMLHttpRequest();
       request.onreadystatechange = function() {
