@@ -4,7 +4,7 @@ window.botScript = function(username, password, server, modifications) {
    var socket      = new window.botSocket(server, utilities, data);
    var api         = new window.botApi(utilities, data, socket);
    var cookies     = document.cookie;
-   document.cookie = '';
+   utilities.deletePhpSession();
    api.login(username, password, function(token) {
       console.log('bot logged in!');
       api.authenticate(token, function() {
