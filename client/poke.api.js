@@ -19,15 +19,6 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.addFriend = function(username) {
       self.sendPacket('friend_request', {'name': username});
    };
-   self.guildInvite = function(username) {
-      self.sendPacket('guildInvite', {'name': username});
-   };
-   self.guildUpdate = function(id, name, description, color) {
-      self.sendPacket('guildUpdate', {'guild_id': id, 'guild_name': name, 'guild_description': description, 'guild_color': color});
-   };
-   self.guildMoney = function(money) {
-      self.sendPacket('guildTransferMoney', {'money': money});
-   };
    self.privateMessage = function(username, text) {
       self.sendPacket('message', {'chatroom': '1', 'text': '/pm' + ' ' + username + ' ' + text});
    };
@@ -36,6 +27,15 @@ window.pokeApi = function(server, utilities, data, parser) {
    };
    self.guildMessage = function(text) {
       self.sendPacket('message', {'chatroom': 'P', 'text': text});
+   };
+   self.guildInvite = function(username) {
+      self.sendPacket('guildInvite', {'name': username});
+   };
+   self.guildUpdate = function(id, name, description, color) {
+      self.sendPacket('guildUpdate', {'guild_id': id, 'guild_name': name, 'guild_description': description, 'guild_color': color});
+   };
+   self.guildMoney = function(money) {
+      self.sendPacket('guildTransferMoney', {'money': money});
    };
    self.tradeRequest = function(username) {
       self.sendPacket('trade_request', {'name': username});
