@@ -735,7 +735,6 @@ window.pokeData = function() {
       {'id': 721, 'name': 'Volcanion', 'rarity': 'Unknown'}
    ];
 	self.itemList = [
-	self.itemList = [
 	   {'id': 1,   'name': 'Master Ball',         'price': 100000},
 	   {'id': 2,   'name': 'Ultra Ball',          'price': 1200},
 	   {'id': 3,   'name': 'Great Ball',          'price': 600},
