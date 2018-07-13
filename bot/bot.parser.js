@@ -10,7 +10,7 @@ window.botParser = function(utilities, data) {
                self.parseEntityTargetChange(packet.p);
             break;
             case 'team':
-               self.parseEquippedPokemon(packet.p);
+               //self.parseEquippedPokemon(packet.p);
             break;
             case 'event':
                self.parseEvents(packet.p);
