@@ -12,8 +12,8 @@ window.botApi = function(utilities, data, socket) {
    self.purchaseItem = function(token, id, quantity) {
       self.sendPacket('purchase', {'token': token, 'purchases': [{'id': id, 'quantity': quantity}]});
    };
-   self.sellLabPokemon = function(pokemonIds) {
-      self.sendPacket('lab', {'token': data.labToken, 'lab': pokemonIds});
+   self.sellPokemon = function(token, pokemonIds) {
+      self.sendPacket('lab', {'token': token, 'lab': pokemonIds});
    };
    self.moveAvatar = function(x, y) {
       self.sendPacket('target', {'x': x, 'y': y});
