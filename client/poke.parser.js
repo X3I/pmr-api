@@ -15,6 +15,9 @@ window.pokeParser = function(utilities, data) {
             case 'event':
                self.parseEvents(packet.p);
             break;
+            case 'attack':
+               self.parseAttack(packet.p);
+            break;
             case 'f':
                self.parseFriends(packet.p);
             break;
@@ -105,6 +108,12 @@ window.pokeParser = function(utilities, data) {
          if ( pokemon ) {
             pokemon.health = packet.hp;
          }
+      }
+   };
+   self.parseAttack = function(packet) {
+      if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'id']) ) {
+         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
+         (pokemon && (pokemon.health = packet.hp));
       }
    };
    self.parseFriends = function(packet) {
