@@ -13,10 +13,10 @@ window.botSocket = function(server, utilities, data) {
          self.connected = false;
       };
       self.ws.onmessage = function(event) {
-         self.receive(JSON.parse(event.data));
+         self.receivePacket(JSON.parse(event.data));
       };
    };
-   self.send = function(packet, callback) {
+   self.sendPacket = function(packet, callback) {
       packet.id = 'P' + self.sentCount;
       self.ws.send(JSON.stringify(packet));
       ++self.sentCount;
@@ -24,7 +24,7 @@ window.botSocket = function(server, utilities, data) {
          self.callbacks[packet.id] = callback;
       }
    };
-   self.receive = function(packet) {
+   self.receivePacket = function(packet) {
       if ( packet.id in self.callbacks ) {
          self.callbacks[packet.id](packet);
          delete self.callbacks[packet.id];
