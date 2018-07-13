@@ -15,9 +15,6 @@ window.pokeParser = function(utilities, data) {
             case 'event':
                self.parseEvents(packet.p);
             break;
-            case 'attack':
-               self.parseAttack(packet.p);
-            break;
             case 'f':
                self.parseFriends(packet.p);
             break;
@@ -106,14 +103,7 @@ window.pokeParser = function(utilities, data) {
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
          var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
          var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.originator);
-         (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
-      }
-   };
-   self.parseAttack = function(packet) {
-      if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'originator', 'id']) ) {
-         var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.to.originator.slice(1));
-         var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.to.originator);
-         (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
+         (pokemon1 && pokemon2 && (pokemon1.health = pokemon2.health = packet.hp));
       }
    };
    self.parseFriends = function(packet) {
