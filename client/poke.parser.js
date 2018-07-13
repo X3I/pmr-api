@@ -170,8 +170,5 @@ window.pokeParser = function(utilities, data) {
          data.labPokemon = inventory;
          data.labToken   = token;
       }
-      else if ( packet.lines.length > 0 && utilities.keysInObject(packet.lines['0'], ['action', 'items', 'token']) && packet.lines['0'].action == 'shop' ) {
-         data.shopToken = packet.lines['0'].token;
-      }
    };
 };
