@@ -739,7 +739,6 @@ window.pokeData = function() {
       {'id': 3,   'name': 'Great Ball',          'price': 600},
       {'id': 4,   'name': 'Poke Ball',           'price': 200},
       {'id': 6,   'name': 'Net Ball',            'price': 1000},
-      {'id': 5,   'name': 'plz be rare candy',   'price': 1000000000000},
       {'id': 7,   'name': 'Dive Ball',           'price': 1000},
       {'id': 8,   'name': 'Nest Ball',           'price': 1000},
       {'id': 9,   'name': 'Repeat Ball',         'price': 1000},
