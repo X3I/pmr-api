@@ -42,6 +42,9 @@ window.botUtilities = function() {
       }
       request.send(post);
    };
+   self.getRequest = function(url, callback) {
+      self.httpRequest('GET', url, [], null, callback);
+   };
    self.postRequest = function(url, post, callback) {
       self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
    };
