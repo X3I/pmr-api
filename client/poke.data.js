@@ -10,7 +10,6 @@ window.pokeData = function() {
    self.money           = 0;
    self.labPokemon      = [];
    self.labToken        = false;
-   self.shopToken       = false;
    self.pokemonList     = [
       {'id': 1, 'name': 'Bulbasaur', 'rarity': 'Super Rare'},
       {'id': 2, 'name': 'Ivysaur', 'rarity': 'Unknown'},
