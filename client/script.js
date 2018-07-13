@@ -4,5 +4,7 @@ window.pokeScript = function(server, modifications) {
    self.data      = new window.pokeData();
    self.parser    = new window.pokeParser(self.utilities, self.data);
    self.api       = new window.pokeApi(server, self.utilities, self.data, self.parser);
-   modifications(self.utilities, self.data, self.api);
+   self.api.socketReady(function() {
+      modifications(self.utilities, self.data, self.api);
+   });
 };
