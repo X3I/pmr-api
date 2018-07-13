@@ -106,12 +106,14 @@ window.pokeParser = function(utilities, data) {
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
          (pokemon && (pokemon.health = packet.hp));
+         console.log(pokemon.health / pokemon.totalHealth);
       }
    };
    self.parseAttack = function(packet) {
       if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'id']) ) {
          var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
          (pokemon && (pokemon.health = packet.hp));
+         console.log(pokemon.health / pokemon.totalHealth);
       }
    };
    self.parseFriends = function(packet) {
