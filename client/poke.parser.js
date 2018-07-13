@@ -170,5 +170,13 @@ window.pokeParser = function(utilities, data) {
          data.labPokemon = inventory;
          data.labToken   = token;
       }
+      else if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['npc', 'options', 'action', 'token']) && packet.lines['1'].action == 'choice' ) {
+         data.npc       = packet.lines['1'].npc;
+         data.npcToken  = packet.lines['1'].token;
+         data.npcOption = packet.lines['1'].options['0'];
+      }
+      else if ( utilities.keysInObject(packet.lines['1'], ['action', 'token']) && packet.lines['1'].action == 'shop' ) {
+         self.npcToken = packet.lines['1'].token;
+      }
    };
 };
