@@ -1,4 +1,4 @@
-window.botSocket = function(server, utilities, data, parser) {
+window.botSocket = function(server, parser) {
    var self       = this;
    self.ws        = false;
    self.connected = false;
