@@ -15,6 +15,9 @@ window.pokeApi = function(server, utilities, data, parser) {
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
+   self.purchaseItem = function(token, id, quantity) {
+      self.sendPacket('purchase', {'token': token, 'purchases':[{'id': id, 'quantity': quantity}]});
+   };
    self.sellLabPokemon = function(pokemonIds) {
       self.sendPacket('lab', {'token': data.labToken, 'lab': pokemonIds});
    };
