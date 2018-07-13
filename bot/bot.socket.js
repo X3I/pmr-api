@@ -1,4 +1,4 @@
-window.botSocket = function(server, utilities, data) {
+window.botSocket = function(server, utilities, data, parser) {
    var self       = this;
    self.ws        = false;
    self.connected = false;
@@ -29,48 +29,9 @@ window.botSocket = function(server, utilities, data) {
          self.callbacks[packet.id](packet);
          delete self.callbacks[packet.id];
       }
-      else if ( packet.a == 'ent' ) {
-         for ( var pokemon = false, i = 0; i < packet.p.entities.length; i++ ) {
-            if ( packet.p.entities[i].type == 0 && utilities.keysInObject(packet.p.entities[i], ['admin', 'id', 'money']) ) {
-               self.logTrainer(
-                  packet.p.entities[i].admin,
-                  packet.p.entities[i].id,
-                  packet.p.entities[i].money
-               );
-            }
-            if ( packet.p.entities[i].type == 1 && utilities.keysInObject(packet.p.entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny']) ) {
-               pokemon = utilities.findBy(data.pokemon, 'id', packet.p.entities[i].monsterId);
-               self.logPokemon(
-                  packet.p.entities[i].id,
-                  packet.p.entities[i].monsterId,
-                  pokemon.name,
-                  packet.p.entities[i].hp - packet.p.entities[i].hpt / 100,
-                  pokemon.rarity,
-                  packet.p.entities[i].shiny
-               );
-            }
-         }
+      else {
+         parser.parsePacket(packet);
       }
-   };
-   self.logTrainer = function(admin, name, money) {
-      utilities.deleteBy(data.trainers, 'name', name);
-      data.trainers.push({
-         'admin': admin,
-         'name':  name,
-         'money': money
-      });
-   };
-   self.logPokemon = function(id, monsterId, name, health, rarity, shiny) {
-      var owned = (id.match(/^p/) ? true : false);
-      utilities.deleteBy(data[owned ? 'trainerPokemon' : 'wildPokemon'], 'id', id);
-      data[owned ? 'trainerPokemon' : 'wildPokemon'].push({
-         'id':        id,
-         'monsterId': monsterId,
-         'name':      name,
-         'health':    health,
-         'rarity':    rarity,
-         'shiny':     shiny
-      });
    };
    self.open();
 };
