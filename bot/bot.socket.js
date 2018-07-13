@@ -27,7 +27,7 @@ window.botSocket = function(server, utilities, data, parser) {
    };
    self.receivePacket = function(packet) {
       packet = JSON.parse(packet);
-      if ( packet.id in self.callbacks ) {
+      if ( 'id' in packet && packet.id in self.callbacks ) {
          self.callbacks[packet.id](packet);
          delete self.callbacks[packet.id];
       }
