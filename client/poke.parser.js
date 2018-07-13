@@ -104,16 +104,14 @@ window.pokeParser = function(utilities, data) {
          utilities.deleteBy(data.pokemon, 'id', packet.originator);
       }
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
-         var pokemon = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
-         if ( pokemon ) {
-            pokemon.health += packet.hp;
-         }
+         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
+         (pokemon && (pokemon.health = packet.hp));
       }
    };
    self.parseAttack = function(packet) {
       if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'id']) ) {
-         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator.slice(1));
-         (pokemon && (pokemon.health -= packet.hp));
+         var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
+         (pokemon && (pokemon.health = packet.hp));
       }
    };
    self.parseFriends = function(packet) {
