@@ -4,7 +4,7 @@ window.botApi = function(utilities, data, socket) {
       socket.sendPacket({'a': action, 'p': packet});
    };
    self.authenticate = function(token, callback) {
-      socket.sendPacket('auth', {'token': token}, callback);
+      socket.sendPacket({{'a': 'auth', 'p': {'token': token}}, callback);
    };
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
