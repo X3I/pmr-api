@@ -1,4 +1,4 @@
-window.pokeData = function() {
+window.botData = function() {
    var self             = this;
    self.trainers        = [];
    self.pokemon         = [];
