@@ -18,8 +18,7 @@ window.botSocket = function(server, parser) {
    };
    self.sendPacket = function(packet, callback) {
       packet.id = 'P' + self.sentCount;
-      packet    = JSON.stringify(packet);
-      self.ws.send(packet);
+      self.ws.send(JSON.stringify(packet));
       ++self.sentCount;
       if ( callback ) {
          self.callbacks[packet.id] = callback;
