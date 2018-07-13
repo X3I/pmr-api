@@ -1,3 +1,115 @@
+// ==UserScript==
+// @name         PMR CLIENT API
+// @namespace    PRM CLIENT API
+// @version      1.9
+// @description  Client version of PMR API
+// @author       jakemadness
+// @license      GPL
+// @match        *://pokemonrise.com/*
+// @require      https://cdn.rawgit.com/jakemadness/pmr-api/3a2743b1078265691e879e62b025dfcfde6fb002/client/poke.utilities.js
+// @require      https://cdn.rawgit.com/jakemadness/pmr-api/5e25fd410643fcdd43fc4f12a06b373eec871df6/client/poke.data.js
+// @require      https://cdn.rawgit.com/jakemadness/pmr-api/3dd06f516b0014e54ac6c83f4f4ff623873702df/client/poke.parser.js
+// @require      https://cdn.rawgit.com/jakemadness/pmr-api/73d6777da09a68690f34060e0bed8d6cc5042bf9/client/poke.api.js
+// @require      https://cdn.rawgit.com/jakemadness/pmr-api/0321d5765ceeb2556022a4f903b403ec02d376bf/client/script.js
+// @run-at       document-end
+// @grant        none
+// ==/UserScript==
+/*
+(function() {// sniff recived packets
+   var original     = window.WebSocket;
+   window.WebSocket = function(url, proto) {
+      var ws = (proto ? new original(url, proto) : new original(url));
+      ws.addEventListener('message', function(event) {
+         console.log(event.data);
+      });
+      return ws;
+   };
+})();
+*/
+var modifications = function(utilities, data, api) {
+   var self          = this;
+   self.notification = function(message) {
+      window.location.hash = message.replace(/[^a-z0-9]+/ig, '-').toLowerCase();
+   };
+   self.sendoutPokemon = function() {
+      for ( var i = 0; i < data.equippedPokemon.length; i++ ) {
+         api.sendoutPokemon(data.equippedPokemon[i].position);
+      }
+   };
+   self.widthdrawPokemon = function() {
+      for ( var i = 0; i < data.equippedPokemon.length; i++ ) {
+         api.withdrawPokemon(data.equippedPokemon[i].position);
+      }
+   };
+   self.followTrainer = function(name) {
+      var trainer = utilities.findBy(data.trainers, 'name', name);
+      (trainer && api.moveAvatar(trainer.targetX, trainer.targetY));
+   };
+   self.catchPokemon = function(type, rarity) {
+      for ( var i = 0; i < data.pokemon.length; i++ ) {
+         if ( data.pokemon[i].isWild && data.pokemon[i].rarity == 'Shiny' ) {
+            api.usePokeBall(type, data.pokemon[i].id);
+            self.notification('catching shiny ' + data.pokemon[i].name);
+         }
+         else if ( data.pokemon[i].isWild && data.pokemon[i].rarity == rarity ) {
+            api.usePokeBall(type, data.pokemon[i].id);
+            self.notification('catching ' + data.pokemon[i].name);
+         }
+      }
+   };
+   self.healPokemon = function(lowest) {
+      for ( var i = 0; i < data.pokemon.length; i++ ) {
+         if ( utilities.findBy(data.equippedPokemon , 'id', data.pokemon[i].monsterId) && (data.pokemon[i].health / data.pokemon[i].totalHealth * 100) <= lowest ) {
+            api.useItem(data.equippedPokemon[i].position, 'Potion');
+         }
+      }
+   };
+   self.revivePokemon = function() {
+      for ( var pokemon = false, i = 0; i < data.equippedPokemon.length; i++ ) {
+          pokemon = utilities.findBy(data.pokemon , 'id', data.equippedPokemon[i].monsterId);
+         if (  && (data.pokemon[i].utilities.findBy(data.equippedPokemon , 'id', data.pokemon[i].monsterId)health / data.pokemon[i].totalHealth * 100) <= 0 ) {
+            api.revivePokemon(data.equippedPokemon[i].position, 'Revive');
+         }
+      }
+   };
+   self.sellLabPokemon = function(lowestStats, lowestLevel) {
+      for ( var ids = [], pokemon = utilities.sortBy(data.labPokemon, 'totalStats', true), i = 0; i < pokemon.length; i++ ) {
+         if ( pokemon[i].totalStats < lowestStats && pokemon[i].level < lowestLevel && !pokemon[i].rarity.match(/((Uber|Super|Very)\sRare)|Unknown/i) && data.labPokemon[i].isSpecial == '' ) {
+            ids.push(pokemon[i].id);
+         }
+      }
+      api.sellLabPokemon(ids);
+      data.labPokemon = [];
+      data.labToken   = false;
+   };
+};
+
+window.pokeScript('wss://www.pokemonrise.com:8081/game', function(utilities, data, api) {
+   window.pdata      = data;
+   window.papi       = api;
+   window.pmods      = new modifications(utilities, data, api);
+   window.setInterval(function() {
+      //window.pmods.healPokemon(50);
+      window.pmods.revivePokemon();
+      window.pmods.catchPokemon('Ultra Ball', 'Shiny');
+      window.pmods.catchPokemon('Ultra Ball', 'Uber Rare');
+      window.pmods.catchPokemon('Ultra Ball', 'Super Rare');
+      window.pmods.catchPokemon('Great Ball', 'Very Rare');
+      window.pmods.catchPokemon('Poke Ball',  'Unknown');
+   }, 5000);
+});
+
+
+
+
+
+
+
+
+
+
+
+
 window.pokeParser = function(utilities, data) {
    var self         = this;
    self.parsePacket = function(packet) {
@@ -106,7 +218,7 @@ window.pokeParser = function(utilities, data) {
       else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
          var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
          var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.originator);
-         (pokemon1 && pokemon2 && (pokemon1.health = pokemon2.health = packet.hp));
+         (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
          console.log(pokemon1.health / pokemon1.totalHealth);
       }
    };
@@ -114,7 +226,7 @@ window.pokeParser = function(utilities, data) {
       if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'originator', 'id']) ) {
          var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.to.originator.slice(1));
          var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.to.originator);
-         (pokemon1 && pokemon2 && (pokemon1.health = pokemon2.health = packet.hp));
+         (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
          console.log(pokemon1.health / pokemon1.totalHealth);
       }
    };
