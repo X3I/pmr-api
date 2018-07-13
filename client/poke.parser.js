@@ -141,7 +141,7 @@ window.pokeParser = function(utilities, data) {
       data.friendRequests = requests;
    };
    self.parseItems = function(packet) {
-      for ( var items = [], i = 0; i < packet.items.length; i++ ) {
+      for ( var item = false, items = [], i = 0; i < packet.items.length; i++ ) {
          if ( utilities.keysInObject(packet.items[i], ['item_id', 'quantity']) ) {
             item = utilities.findBy(data.itemList, 'id', packet.items[i].item_id);
             (item && items.push({
@@ -158,8 +158,6 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseNpcResponse = function(packet) {
       if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
-         var storeage = packet.lines['1'].storage;
-         var token    = packet.lines['1'].token;
          for ( var pokemon = false, inventory = [], storage = packet.lines['1'].storage, token = packet.lines['1'].token, i = 0; i < storage.length; i++ ) {
             if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price', 'level']) ) {
                pokemon = utilities.findBy(data.pokemonList, 'id', storage[i].pokemon_id);
