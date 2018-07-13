@@ -107,7 +107,6 @@ window.pokeParser = function(utilities, data) {
          var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
          var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.originator);
          (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
-         console.log(pokemon1.health / pokemon1.totalHealth);
       }
    };
    self.parseAttack = function(packet) {
@@ -115,7 +114,6 @@ window.pokeParser = function(utilities, data) {
          var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.to.originator.slice(1));
          var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.to.originator);
          (pokemon1 && pokemon2 && (pokemon1.health = packet.hp) && (pokemon2.health = packet.hp));
-         console.log(pokemon1.health / pokemon1.totalHealth);
       }
    };
    self.parseFriends = function(packet) {
