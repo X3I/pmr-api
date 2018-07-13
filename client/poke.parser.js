@@ -74,7 +74,7 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseEquippedPokemon = function(packet) {
       for ( var pokemon = false, equipped = [], keys = Object.keys(packet), i = 0; i < keys.length; i++ ) {
-         if ( utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total']) ) {
+         if ( packet[keys[i]] && utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total']) ) {
             pokemon = utilities.findBy(data.pokemonList, 'id', packet[keys[i]].pokemon_id);
             (pokemon && equipped.push({
                'name':        pokemon.name,
