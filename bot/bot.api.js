@@ -1,14 +1,7 @@
 window.botApi = function(utilities, data, socket) {
    var self        = this;
    self.sendPacket = function(action, packet, callback) {
-      if ( socket.connected ) {
-         socket.send({'a': action, 'p': packet}, callback || false);
-      }
-      else {
-         setTimeout(function() {
-            self.sendPacket(action, packet, callback);
-         }, 1000);
-      }
+      socket.send({'a': action, 'p': packet}, callback || false);
    };
    self.authenticate = function(token, callback) {
       self.sendPacket('auth', {'token': token}, callback);
