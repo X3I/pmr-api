@@ -111,7 +111,7 @@ window.pokeParser = function(utilities, data) {
    };
    self.parseAttack = function(packet) {
       if ( utilities.keysInObject(packet, ['to']) && utilities.keysInObject(packet.to, ['hp', 'originator', 'id']) ) {
-         var pokemon = utilities.findBy(data.pokemon, 'id', packet.to.);
+         var pokemon = utilities.findBy(data.pokemon, 'id', packet.to.originator);
          (pokemon && (pokemon.health = packet.hp));
          console.log(pokemon.health / pokemon.totalHealth);
       }
