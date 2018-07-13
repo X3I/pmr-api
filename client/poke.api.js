@@ -12,18 +12,6 @@ window.pokeApi = function(server, utilities, data, parser) {
       packet = JSON.parse(packet);
       parser.parsePacket(packet);
    };
-   
-   
-   
-      self.npcResponse = function() {
-      self.sendPacket('action', {'npc': data.npc, 'token': data.npcToken, 'response': data.npcOption});
-   };
-   self.purchaseItem = function(id, quantity) {
-      self.sendPacket('purchase', {'token': data.npcToken, 'purchases':[{'id': id, 'quantity': quantity}]});
-   };
-   
-   
-   
    self.useEmote = function(emote) {
       self.sendPacket('emote', {'style': emote});
    };
