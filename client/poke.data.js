@@ -7,6 +7,16 @@ window.pokeData = function() {
    self.friends         = [];
    self.friendRequests  = [];
    self.items           = [];
+   
+   
+            self.npc       = false;
+         self.npcToken  = false;
+         self.npcOption = false;
+   
+   
+   
+   
+   
    self.money           = 0;
    self.labPokemon      = [];
    self.labToken        = false;
