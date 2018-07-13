@@ -175,7 +175,7 @@ window.pokeParser = function(utilities, data) {
          data.npcToken  = packet.lines['1'].token;
          data.npcOption = packet.lines['1'].options['0'];
       }
-      else if ( utilities.keysInObject(packet.lines['0'], ['action']) && packet.lines['0'].action == 'shop' ) {
+      else if ( utilities.keysInObject(packet, ['token']) ) {
          self.npcToken = packet.token;
       }
    };
