@@ -6,12 +6,12 @@ window.botScript = function(username, password, server, modifications) {
    self.socket    = new window.botSocket(server, self.parser);
    self.api       = new window.botApi(self.utilities, self.data, self.socket);
    self.session   = self.utilities.getCookie('PHPSESSID');
-   self.utilities.deleteCookie('PHPSESSID');
    self.socket.socketReady(function() {
+      self.utilities.deleteCookie('PHPSESSID');
       self.api.login(username, password, function(token) {
+         self.utilities.setCookie('PHPSESSID', self.session, 10);
          console.log('bot logged in!');
          self.api.authenticate(token, function() {
-            self.utilities.setCookie('PHPSESSID', self.session, 10);
             console.log('bot authenticated!');
             modifications(self);
          });
