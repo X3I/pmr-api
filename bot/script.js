@@ -13,7 +13,7 @@ window.botScript = function(username, password, server, modifications) {
          self.utilities.setCookie('PHPSESSID', self.sessionId);
          self.api.authenticate(token, function() {
             console.log('bot authenticated!');
-            modifications(self.utilities, self.data, self.socket, self.api);
+            modifications(self);
          });
       });
    });
