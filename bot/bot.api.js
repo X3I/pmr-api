@@ -1,6 +1,6 @@
 (function() {
    'use strict';
-   modules.create('api', function(utilities, data, socket) {
+   botModules.create('api', function(utilities, data, socket) {
       var self        = this;
       self.sendPacket = function(action, packet, callback) {
          socket.sendPacket({'a': action, 'p': packet}, callback || false);
