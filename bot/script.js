@@ -9,7 +9,7 @@ window.botScript = function(username, password, server, modifications) {
    self.socket.socketReady(function() {
       self.utilities.deleteCookie('PHPSESSID');
       self.api.login(username, password, function(token) {
-         self.utilities.setCookie('PHPSESSID', self.session, 10);
+         self.utilities.setCookie('PHPSESSID', self.session, 1);
          console.log('bot logged in!');
          self.api.authenticate(token, function() {
             console.log('bot authenticated!');
