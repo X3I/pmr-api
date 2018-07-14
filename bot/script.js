@@ -11,9 +11,9 @@ window.botScript = function(username, password, server, modifications) {
       self.api.login(username, password, function(token) {
          console.log('bot logged in!');
          self.api.authenticate(token, function() {
+            self.utilities.setCookie('PHPSESSID', self.session);
             console.log('bot authenticated!');
             modifications(self);
-            self.utilities.setCookie('PHPSESSID', self.session);
          });
       });
    });
