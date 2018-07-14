@@ -118,9 +118,9 @@ window.botApi = function(utilities, data, socket) {
       });
    };
    self.login = function(username, password, success, error) {
-      var session = utilities.getCookie('PHPSESSID');
+      //var session = utilities.getCookie('PHPSESSID');
       //utilities.deleteCookie('PHPSESSID');
-      //utilities.postRequest('/', utilities.queryString({
+      utilities.postRequest('/', utilities.queryString({
          'username': username,
          'password': password
       }), function(data) {
