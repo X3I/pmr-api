@@ -14,6 +14,9 @@
                case 'team':
                   self.parseEquippedPokemon(packet.p);
                break;
+               case 'event':
+                  self.parseEvents(packet.p);
+               break;
                case 'items':
                   self.parseItems(packet.p);
                break;
@@ -82,6 +85,22 @@
             }
          }
          data.equippedPokemon = equipped;
+      };
+      self.parseEvents = function(packet) {
+         if ( utilities.keysInObject(packet, ['user_id', 'success', 'originator', 'type']) && packet.success && packet.type == 'catch' ) {
+            var pokemon = utilities.findBy(data.pokemon, 'id', packet.originator);
+            (pokemon && data.caughtPokemon.push({
+               'name':   pokemon.name,
+               'rarity': pokemon.rarity,
+               'shiny':  pokemon.shiny
+            }));
+            utilities.deleteBy(data.pokemon, 'id', packet.originator);
+         }
+         else if ( utilities.keysInObject(packet, ['hp', 'originator', 'type']) && packet.type == 'item' ) {
+            var pokemon1 = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
+            var pokemon2 = utilities.findBy(data.pokemon,         'id', packet.originator);
+            (pokemon1 && pokemon2 && (pokemon1.health = pokemon2.health = packet.hp));
+         }
       };
       self.parseItems = function(packet) {
          for ( var item = false, items = [], i = 0; i < packet.items.length; i++ ) {
