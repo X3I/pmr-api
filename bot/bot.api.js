@@ -119,12 +119,12 @@ window.botApi = function(utilities, data, socket) {
    };
    self.login = function(username, password, success, error) {
       var session = utilities.getCookie('PHPSESSID');
-      utilities.deleteCookie('PHPSESSID');
-      utilities.postRequest('/', utilities.queryString({
+      //utilities.deleteCookie('PHPSESSID');
+      //utilities.postRequest('/', utilities.queryString({
          'username': username,
          'password': password
       }), function(data) {
-         utilities.setCookie('PHPSESSID', session, 365);
+         //utilities.setCookie('PHPSESSID', session, 365);
          ((match = data.match(/token\s*=\s*.([0-9a-z]*)/i)) ? (success && success(match['1'])) : (error && error()));
       });
    };
