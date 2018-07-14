@@ -124,7 +124,7 @@ window.botApi = function(utilities, data, socket) {
          'username': username,
          'password': password
       }), function(data) {
-         utilities.setCookie('PHPSESSID', session, 10);
+         utilities.setCookie('PHPSESSID', session, 365);
          ((match = data.match(/token\s*=\s*.([0-9a-z]*)/i)) ? (success && success(match['1'])) : (error && error()));
       });
    };
