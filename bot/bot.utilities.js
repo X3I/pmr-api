@@ -53,16 +53,9 @@ window.botUtilities = function() {
       date.setTime(date.getDate() + date.getTime() + (days * 24 * 60 * 60 * 1000));
       return date.toGMTString();
    };
-   self.getCookie = function(name, callback) {
+   self.getCookie = function(name) {
       var match = document.cookie.match(new RegExp(name + '=([^\;]*)'));
-      if ( match ) {
-         callback(match['1']);
-      }
-      else {
-         setTimeout(function() {
-            self.getCookie(name, callback);
-         }, 1000);
-      }
+      return (match ? match['1'] : false);
    };
    self.setCookie = function(name, value, days) {
       document.cookie = name + '=' + value + '; expires=' + self.cookieDate(days) + '; path=/';
