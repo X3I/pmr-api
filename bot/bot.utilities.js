@@ -63,4 +63,12 @@ window.botUtilities = function() {
    self.deleteCookie = function(name) {
       document.cookie = name + '=; expires=' + self.cookieDate(-365) + '; path=/';
    };
+   self.createElement = function(tag, attributes, value) {
+      var element       = document.createElement(tag);
+      element.innerHTML = value || '';
+      for ( var i = 0; attributes && i < attributes.length; i += 2 ) {
+         element.setAttribute(attributes[i], attributes[i + 1]);
+      }
+      return element;
+   };
 };
