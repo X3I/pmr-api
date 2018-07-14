@@ -4,7 +4,8 @@ window.pokeScript = function(server, modifications) {
    self.data      = new window.pokeData();
    self.parser    = new window.pokeParser(self.utilities, self.data);
    self.api       = new window.pokeApi(server, self.utilities, self.data, self.parser);
-   self.utilities.setCookie('session', self.utilities.getCookie('PHPSESSID'));
+   self.session   = self.utilities.getCookie('PHPSESSID');
+   (self.session && self.utilities.setCookie('session', self.session));
    self.api.socketReady(function() {
       modifications(self);
    });
