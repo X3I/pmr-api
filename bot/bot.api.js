@@ -1,6 +1,6 @@
 (function() {
    'use strict';
-   botModules.create('api', function(utilities, data, socket) {
+   modules.create('api', function(utilities, data, socket) {
       var self        = this;
       self.sendPacket = function(action, packet, callback) {
          socket.sendPacket({'a': action, 'p': packet}, callback || false);
@@ -101,9 +101,9 @@
             'username': username,
             'password': password
          }), function(response) {
-            console.log(response);
             utilities.setCookie('PHPSESSID', session, 365);
-            ((match = response.match(/token\s*=\s*.([0-9a-z]*)/i)) ? (success && self.authenticate(match['1'], success)) : (error && error()));
+            response = response.match(/token\s*=\s*.([0-9a-z]+)/i);
+            (response ? (success && self.authenticate(response['1'], success)) : (error && error()));
          });
       };      
    });
