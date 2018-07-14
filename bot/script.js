@@ -6,6 +6,7 @@ window.botScript = function(username, password, server, modifications) {
    self.socket    = new window.botSocket(server, self.parser);
    self.api       = new window.botApi(self.utilities, self.data, self.socket);
    self.sessionId = self.utilities.getCookie('PHPSESSID');
+   console.log(self.sessionId);
    self.utilities.deleteCookie('PHPSESSID');
    self.socket.socketReady(function() {
       self.api.login(username, password, function(token) {
