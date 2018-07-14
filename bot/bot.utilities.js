@@ -57,10 +57,10 @@ window.botUtilities = function() {
       var match = document.cookie.match(new RegExp(name + '=([^\;]*)'));
       return (match ? match['1'] : false);
    };
-   self.setCookie = function(name, value) {
-      document.cookie = name + '=' + value + ';' + self.cookieDate(3650);
+   self.setCookie = function(name, value, days) {
+      document.cookie = name + '=' + value + ';' + self.cookieDate(days) + ';';
    };
    self.deleteCookie = function(name) {
-      document.cookie = name + '=;' + self.cookieDate(-3650);
+      self.setCookie(name, '', -3650);
    };
 };
