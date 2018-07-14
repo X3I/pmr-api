@@ -48,19 +48,19 @@ window.botUtilities = function() {
    self.postRequest = function(url, post, callback) {
       self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
    };
-   self.cookieDate = function(days) {
+   self.cookieDate = function(years) {
       var date = new Date();
-      date.setDate(date.getDate() + days);
-      return date.toUTCString();
+      date.setTime(date.getDate() + date.getTime() + (years * 365 * 24 * 60 * 60 * 1000));
+      return date.toGMTString();
    };
    self.getCookie = function(name) {
       var match = document.cookie.match(new RegExp(name + '=([^\;]*)'));
       return (match ? match['1'] : false);
    };
-   self.setCookie = function(name, value, days) {
-      document.cookie = name + '=' + value + ';' + self.cookieDate(days) + ';';
+   self.setCookie = function(name, value, years) {
+      document.cookie = name + '=' + value + '; expires=' + self.cookieDate(years);
    };
    self.deleteCookie = function(name) {
-      self.setCookie(name, '', -3650);
+      self.setCookie(name, '', -10);
    };
 };
