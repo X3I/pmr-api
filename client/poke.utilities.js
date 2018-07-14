@@ -34,16 +34,6 @@ window.pokeUtilities = function() {
          }
       }
    };
-   self.getCookie = function(name) {
-      var match = document.cookie.match(new RegExp(name + '=([^\;]*)'));
-      return (match ? match['1'] : false);
-   };
-   self.setCookie = function(name, value) {
-      document.cookie = name + '=' + value + ';expires=Sat, 01 Jan 228 00:00:00 GMT';
-   };
-   self.deleteCookie = function(name) {
-      document.cookie = name + '=;expires=Tue, 01 Jan 2008 00:00:00 GMT';
-   };
    self.interceptSocket = function(url, set, parse) {
       var websocket    = window.WebSocket;
       window.WebSocket = function(server) {
