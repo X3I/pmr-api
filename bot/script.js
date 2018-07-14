@@ -1,5 +1,7 @@
 window.botScript = function(username, password, server, modifications) {
    var self       = this;
+   self.username  = username;
+   self.password  = password;
    self.utilities = new window.botUtilities();
    self.data      = new window.botData();
    self.parser    = new window.botParser(self.utilities, self.data);
