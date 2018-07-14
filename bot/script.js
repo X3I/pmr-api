@@ -6,11 +6,13 @@ window.botScript = function(username, password, server, modifications) {
    self.socket    = new window.botSocket(server, self.parser);
    self.api       = new window.botApi(self.utilities, self.data, self.socket);
    self.socket.socketReady(function() {
-      self.api.login(username, password, function(token) {
-         console.log('bot logged in!');
-         self.api.authenticate(token, function() {
-            console.log('bot authenticated!');
-            modifications(self);
+      self.utilities.getCookie('PHPSESSID', function(session) {
+         self.api.login(username, password, function(token) {
+            self.utilities.setCookie('PHPSESSID', session, 365);
+            self.api.authenticate(token, function() {
+               console.log('bot authenticated!');
+               modifications(self);
+            });
          });
       });
    });
