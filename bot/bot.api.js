@@ -41,6 +41,9 @@
       self.guildMoney = function(money) {
          self.sendPacket('guildTransferMoney', {'money': money});
       };
+      self.transferGuildMoney = function(money, id) {
+         self.sendPacket('guildTransferMoneyMember', {'money': money, 'member': id});
+      };
       self.tradeRequest = function(username) {
          self.sendPacket('trade_request', {'name': username});
       };
