@@ -62,6 +62,11 @@
       self.postRequest = function(url, post, callback) {
          self.httpRequest('POST', url, ['X-Requested-With', 'XMLHttpRequest', 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'], post, callback);
       };
+      self.elementStyles = function(element, styles) {
+         for ( var i = 0; i < styles.length; i += 2 ) {
+            element.style[styles[i]] = styles[i + 1];
+         }
+      };
       self.createElement = function(tag, attributes, value) {
          var element       = document.createElement(tag);
          element.innerHTML = value || '';
