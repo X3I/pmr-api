@@ -1,7 +1,7 @@
 (function() {
    'use strict';
    botModules.create('data', function() {
-      var self       = this;
+      var self             = this;
       self.trainers        = [];
       self.pokemon         = [];
       self.equippedPokemon = [];
