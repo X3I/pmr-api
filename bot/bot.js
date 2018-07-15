@@ -3,6 +3,8 @@
    botModules.create('bot', function(server, username, password, callback) {
 
       var self       = this;
+      self.username  = username;
+      self.password  = password;
       self.utilities = botModules.require('utilities', []);
       self.data      = botModules.require('data',      []);
       self.parser    = botModules.require('parser',    [self.utilities, self.data]);
