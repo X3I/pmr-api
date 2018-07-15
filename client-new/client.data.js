@@ -1,6 +1,6 @@
 (function() {
    'use strict';
-   modules.create('data', function() {
+   window.modules.create('data', function() {
       var self             = this;
       self.trainers        = [];
       self.pokemon         = [];
