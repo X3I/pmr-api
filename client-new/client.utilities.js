@@ -1,6 +1,6 @@
 (function() {
    'use strict';
-   modules.create('utilities', function(utilities, data, socket) {
+   window.modules.create('utilities', function(utilities, data, socket) {
       var self          = this;
       self.keysInObject = function(object, keys) {
          for ( var i = 0; i < keys.length; i++ ) {
