@@ -16,6 +16,7 @@
             callback(self);
          });
       };
+ 
       var close = function() {
          console.log('socket closed!');
          self.socket.open(open, close);
