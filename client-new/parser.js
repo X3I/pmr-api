@@ -30,7 +30,7 @@
          }
       };
       self.parseEntities = function(packet) {
-         for ( var entities = packet.entities || [], found = false, i = 0; i < entities.length; i++ ) {
+         for ( var entities = packet.entities, found = false, i = 0; i < entities.length; i++ ) {
             if ( utilities.keysInObject(entities[i], ['id', 'admin', 'money', 'x', 'y', 'tx', 'ty']) ) {
                utilities.deleteBy(data.trainers, 'name', entities[i].id);
                data.trainers.push({
@@ -64,7 +64,7 @@
          }
       };
       self.parseEntityTargetChange = function(packet) {
-         packet = packet.source || {};
+         packet = packet.source;
          if ( utilities.keysInObject(packet, ['id', 'x', 'y', 'tx', 'ty']) ) {
             var found = utilities.findBy(data.pokemon, 'id', packet.id) || utilities.findBy(data.trainers, 'name', packet.id);
             if ( found ) {
