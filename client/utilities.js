@@ -44,6 +44,7 @@
          window.WebSocket.prototype = websocket.prototype;
       };
       self.socketReady = function(socket, callback) {
+         console.log('test');
          if ( socket && socket.readyState == 1 ) {
             callback();
          }
