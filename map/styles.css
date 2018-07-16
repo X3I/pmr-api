@@ -1,0 +1,85 @@
+*, *:before, *:after {
+   box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+}
+
+html, body {
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 12px;
+   line-height: 1.5;
+   color: #FFFFFF;
+   word-break: break-word;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+   background: none;
+   width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(0, 0, 0, 0.8);
+}
+
+.c1 {
+   background: #24C22E;
+}
+
+.c2 {
+   background: #68D724;
+}
+
+.c3 {
+   background: #24ADC2;
+}
+
+.c4 {
+   background: #733626;
+}
+
+.c5 {
+   background: #7824C2;
+}
+
+.c6 {
+   background: #989898;
+}
+
+.c7 {
+   background: #C32424;
+}
+
+.c8 {
+   background: #C224BD;
+}
+
+#map {
+   width: 5100px;
+   height: 100%;
+}
+
+#map > div {
+   display: inline-block;
+   width: 100px;
+   float: left;
+   overflow: hidden;
+   border: 1px dashed #333;
+}
+
+#map > div:before {
+   content: attr(data-coords);
+   display: block;
+   text-align: center;
+   padding: 20px 0;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+
+#map > div:not([data-name=""]):hover:before {
+   content: attr(data-name);
+}
