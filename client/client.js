@@ -6,7 +6,7 @@
       self.data      = window.modules.require('data',      []);
       self.parser    = window.modules.require('parser',    [self.utilities, self.data]);
       self.api       = window.modules.require('api',       [server, self.utilities, self.data, self.parser]);
-      self.api.socketReady(function() {
+      self.utilities.socketReady(self.api.socket, function() {
          callback(self);
       });
    });
