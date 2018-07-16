@@ -6,7 +6,7 @@
       self.pokemon         = [];
       self.equippedPokemon = [];
       self.caughtPokemon   = [];
-      self.labPokemon      = [];
+      self.storage         = [];
       self.items           = [];
       self.money           = 0;
       self.token           = false;
