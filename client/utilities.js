@@ -49,7 +49,7 @@
          window.WebSocket.prototype = websocket.prototype;
       };
       self.socketReady = function(socket, callback) {
-         if ( socket.readyState == 1 ) {
+         if ( 'readyState' in socket && socket.readyState == 1 ) {
             callback();
          }
          else {
