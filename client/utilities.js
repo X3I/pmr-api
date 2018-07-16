@@ -43,15 +43,5 @@
          };
          window.WebSocket.prototype = websocket.prototype;
       };
-      self.socketReady = function(socket, callback) {
-         if ( socket !== false && socket.readyState == 1 ) {
-            callback();
-         }
-         else {
-            setTimeout(function() {
-               self.socketReady(socket, callback);
-            }, 1000);
-         }
-      };
    });
 })();
