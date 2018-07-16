@@ -2634,7 +2634,7 @@
       for ( var children = [], i = 0; i < coords.length; i++ ) {
          children.push(createElement('div', [
             'class',       classes[coords[i].type],
-            'data-name',   coords[i].name,
+            'data-name',   coords[i].town,
             'data-coords', coords[i].x + ', ' + coords[i].y
          ]));
       }
