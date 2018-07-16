@@ -16,11 +16,6 @@
          }
          return sum;
       };
-      self.sortBy = function(array, key, descending) {
-         return array.sort(function(a, b) {
-            return (descending ? b[key] - a[key] : a[key] - b[key]);
-         });
-      };
       self.findBy = function(array, key, value) {
          for ( var i = 0; i < array.length; i++ ) {
             if ( array[i][key] == value ) {
