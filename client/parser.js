@@ -168,7 +168,7 @@
                   }));
                }
             }
-            data.labPokemon = inventory;
+            data.storedPokemon = inventory;
          }
       };
    });
