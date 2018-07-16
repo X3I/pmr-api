@@ -147,7 +147,7 @@
          ('token' in packet && (data.token = packet.token));
          if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['action' ,'storage']) && packet.lines['1'].action == 'lab' ) {
             for ( var inventory = [], storage = packet.lines['1'].storage, found = false, i = 0; i < storage.length; i++ ) {
-               if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price', 'level']) ) {
+               if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'original', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price', 'level']) ) {
                   found = utilities.findBy(data.pokemonList, 'id', storage[i].pokemon_id);
                   (found && inventory.push({
                      'rarity':         found.rarity,
@@ -156,6 +156,7 @@
                      'name':           storage[i].name,
                      'isSpecial':      storage[i].special,
                      'isStarter':      storage[i].is_starter,
+                     'caughtBy':       storage[i].original,
                      'attack':         storage[i].iv_atk,
                      'speed':          storage[i].iv_spd,
                      'defence':        storage[i].iv_def,
