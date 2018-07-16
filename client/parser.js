@@ -145,7 +145,7 @@
       };
       self.parseNpcResponse = function(packet) {
          ('token' in packet && (data.token = packet.token));
-         if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['action' ,'storage', 'token']) && packet.lines['1'].action == 'lab' ) {
+         if ( packet.lines.length > 1 && utilities.keysInObject(packet.lines['1'], ['action' ,'storage']) && packet.lines['1'].action == 'lab' ) {
             for ( var inventory = [], storage = packet.lines['1'].storage, found = false, i = 0; i < storage.length; i++ ) {
                if ( utilities.keysInObject(storage[i], ['pk', 'pokemon_id', 'name', 'special', 'is_starter', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'market_price', 'level']) ) {
                   found = utilities.findBy(data.pokemonList, 'id', storage[i].pokemon_id);
