@@ -2630,7 +2630,7 @@
       }
    };
 
-   window.loadMap = function(mapId) {
+   var loadMap = function(mapId) {
       for ( var children = [], i = 0; i < coords.length; i++ ) {
          children.push(createElement('div', [
             'class',       classes[coords[i].type],
@@ -2641,4 +2641,8 @@
       appendChildren(document.getElementById(mapId), children);
    };
 
+   document.documentElement.innerHTml = '';
+   document.getElementsByTagName('body')['0'].appendChild(createElement('div', ['id', 'map']));
+   loadMap('map');
+   
 })();
