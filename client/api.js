@@ -10,6 +10,19 @@
          packet = JSON.stringify({'a': action, 'p': packet});
          self.socket.send(packet);
       };
+      
+      self.socketReady = function(callback) {
+         if ( self.socket.readyState == 1 ) {
+            callback();
+         }
+         else {
+            setTimeout(function() {
+               self.socketReady(callback);
+            }, 1000);
+         }
+      };
+      
+      
       self.receivePacket = function(packet) {
          packet = JSON.parse(packet);
          parser.parsePacket(packet);
