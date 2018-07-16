@@ -167,7 +167,7 @@
                   }));
                }
             }
-            data.labPokemon = utilities.sortBy(inventory, 'totalStats', true);
+            data.labPokemon = inventory;
          }
       };
    });
