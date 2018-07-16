@@ -2,6 +2,9 @@
    'use strict';
    window.modules.create('utilities', function() {
       var self          = this;
+      self.isObject = function(object) {
+         return (object !== null && typeof object === 'object');
+      };
       self.keysInObject = function(object, keys) {
          for ( var i = 0; i < keys.length; i++ ) {
             if ( !(keys[i] in object) ) {
@@ -44,7 +47,7 @@
          window.WebSocket.prototype = websocket.prototype;
       };
       self.socketReady = function(socket, callback) {
-         if ( 'readyState' in socket && socket.readyState == 1 ) {
+         if ( self.isObject(socket) && 'readyState' in socket && socket.readyState == 1 ) {
             callback();
          }
          else {
