@@ -14,16 +14,6 @@
          packet = JSON.parse(packet);
          parser.parsePacket(packet);
       };
-      self.socketReady = function(callback) {
-         if ( self.socket.readyState == 1 ) {
-            callback();
-         }
-         else {
-            setTimeout(function() {
-               self.socketReady(callback);
-            }, 1000);
-         }
-      };
       self.useEmote = function(emote) {
          self.sendPacket('emote', {'style': emote});
       };
