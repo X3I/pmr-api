@@ -25,51 +25,51 @@ html, body {
    background: rgba(0, 0, 0, 0.8);
 }
 
-.c1 {
+.color1 {
    background: #24C22E;
 }
 
-.c2 {
+.color2 {
    background: #68D724;
 }
 
-.c3 {
+.color3 {
    background: #24ADC2;
 }
 
-.c4 {
+.color4 {
    background: #733626;
 }
 
-.c5 {
+.color5 {
    background: #7824C2;
 }
 
-.c6 {
+.color6 {
    background: #989898;
 }
 
-.c7 {
+.color7 {
    background: #C32424;
 }
 
-.c8 {
+.color8 {
    background: #C224BD;
 }
 
-.et {
+.exittop {
    border-top-style: dashed !important;
 }
 
-.eb {
+.exitbottom {
    border-bottom-style: dashed !important;
 }
 
-.el {
+.exitleft {
    border-left-style: dashed !important;
 }
 
-.er {
+.exitright {
    border-right-style: dashed !important;
 }
 
