@@ -2630,10 +2630,28 @@
       }
    };
 
+   var coordExitClasses = function(coord) {
+      for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
+         if ( coord.x == coord.exits[i]['0'] && coord.y > coord.exits[i]['1'] ) {
+            exits.push('ettop');
+         }
+         if ( coord.x == coord.exits[i]['0'] && coord.y < coord.exits[i]['1'] ) {
+            exits.push('ebottom');
+         }
+         if ( coord.y == coord.exits[i]['1'] && coord.x > coord.exits[i]['0'] ) {
+            exits.push('eleft');
+         }
+         if ( coord.y == coord.exits[i]['1'] && coord.x < coord.exits[i]['0'] ) {
+            exits.push('eright');
+         }
+      }
+      return exits.join(' ');
+   };
+
    var loadMap = function(mapId) {
       for ( var children = [], i = 0; i < coords.length; i++ ) {
          children.push(createElement('div', [
-            'class',       classes[coords[i].type],
+            'class',       classes[coords[i].type] + ' ' + coordExitClasses(coords[i]),
             'data-name',   coords[i].town,
             'data-coords', coords[i].x + ', ' + coords[i].y
          ]));
