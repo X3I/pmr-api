@@ -12,7 +12,6 @@ html, body {
 div {
    position: relative;
    display: block;
-   overflow: hidden;
 }
 
 ::-webkit-scrollbar-track,
@@ -66,6 +65,7 @@ div {
    width: 96px;
    float: left;
    border: 2px solid #333333;
+   overflow: hidden;
 }
 
 #map > div:before {
