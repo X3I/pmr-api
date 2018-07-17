@@ -14,9 +14,6 @@
                case 'team':
                   self.parseEquippedPokemon(packet.p);
                break;
-               case 'f':
-                  self.parseFriends(packet.p);
-               break;
                case 'items':
                   self.parseItems(packet.p);
                break;
@@ -92,28 +89,6 @@
             }
          }
          data.equippedPokemon = equipped;
-      };
-      self.parseFriends = function(packet) {
-         for ( var friends = [], friend = packet.friends, i = 0; i < friend.length; i++ ) {
-            if ( utilities.keysInObject(friend[i], ['id', 'name', 'area']) ) {
-               friends.push({
-                  'id':   friend[i].id,
-                  'name': friend[i].name,
-                  'area': friend[i].area
-               });
-            }
-         }
-         for ( var requests = [], request = packet.requests, i = 0; i < request.length; i++ ) {
-            if ( utilities.keysInObject(request[i], ['id', 'name', 'area']) ) {
-               requests.push({
-                  'id':   request[i].id,
-                  'name': request[i].name,
-                  'area': request[i].area
-               });
-            }
-         }
-         data.friends        = friends;
-         data.friendRequests = requests;
       };
       self.parseItems = function(packet) {
          for ( var items = [], item = packet.items, found = false, i = 0; i < item.length; i++ ) {
