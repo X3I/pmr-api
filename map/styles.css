@@ -84,7 +84,7 @@ div {
 
 #map > div[data-highlight="1"]:after {
    content: '';
-   position: abolute;
+   position: absolute;
    top: 0;
    left: 0;
    display: block;
