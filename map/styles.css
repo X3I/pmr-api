@@ -95,6 +95,7 @@ html, body {
 }
 
 #map > div[data-highlight="1"]:after {
+   content: '';
    position: abolute;
    top: 0;
    left: 0;
