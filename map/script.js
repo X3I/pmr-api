@@ -2654,12 +2654,17 @@
    };
 
    var loadMap = function(mapId, coords) {
-      for ( var children = [], i = 0; i < coords.length; i++ ) {
-         children.push(createElement('div', [
-            'class',      coordAreaClass(coords[i]) + ' ' + coordExitClasses(coords[i]),
-            'data-name',   coords[i].town,
-            'data-coords', coords[i].x + ', ' + coords[i].y
-         ]));
+      for ( var children = [], element = false, i = 0; i < coords.length; i++ ) {
+         element = createElement('div', [
+            'class',           coordAreaClass(coords[i]),
+            'data-name',       coords[i].town,
+            'data-coords',     coords[i].x + ', ' + coords[i].y,
+            'data-highlight', '0'
+         ]);
+         element.onclick = function() {
+            this.setAttribute('data-highlight', this.getAttribute('data-highlight') == 0 ? 1 : 0);
+         };
+         children.push(element);
       }
       appendChildren(document.getElementById(mapId), children);
    };
