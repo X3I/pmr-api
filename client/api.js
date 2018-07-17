@@ -6,11 +6,6 @@
       self.setSocket = function(socket) {
          self.socket = socket;
       };
-      self.sendPacket = function(action, packet) {
-         packet = JSON.stringify({'a': action, 'p': packet});
-         self.socket.send(packet);
-      };
-      
       self.socketReady = function(callback) {
          if ( self.socket.readyState == 1 ) {
             callback();
@@ -21,8 +16,10 @@
             }, 1000);
          }
       };
-      
-      
+      self.sendPacket = function(action, packet) {
+         packet = JSON.stringify({'a': action, 'p': packet});
+         self.socket.send(packet);
+      };
       self.receivePacket = function(packet) {
          packet = JSON.parse(packet);
          parser.parsePacket(packet);
