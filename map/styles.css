@@ -57,6 +57,22 @@ html, body {
    background: #C224BD;
 }
 
+.et {
+   border-top-style: dashed !important;
+}
+
+.eb {
+   border-bottom-style: dashed !important;
+}
+
+.el {
+   border-left-style: dashed !important;
+}
+
+.er {
+   border-right-style: dashed !important;
+}
+
 #map {
    width: 5100px;
    height: 100%;
@@ -67,7 +83,7 @@ html, body {
    width: 100px;
    float: left;
    overflow: hidden;
-   border: 1px dashed #333;
+   border: 2px solid #333;
 }
 
 #map > div:before {
