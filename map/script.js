@@ -1,16 +1,5 @@
 (function() {
 
-   var classes = {
-      'Route':       'c1',
-      'RouteFloral': 'c2',
-      'Docks':       'c3',
-      'RouteRocky':  'c4',
-      'Graveyard':   'c5',
-      'Forest':      'c6',
-      'Volcano':     'c7',
-      'Town':        'c8'
-   };
-
    var coords = [
       {"x":"-25","y":"-25","town":"","type":"Route","id":"4","exits":[["-25","-24"],["-26","-25"],["-25","-26"],["-24","-25"]]},
       {"x":"-24","y":"-25","town":"","type":"Route","id":"4","exits":[["-23","-25"],["-25","-25"],["-24","-26"]]},
@@ -2630,28 +2619,42 @@
       }
    };
 
+   var coordAreaClass = function(coord) {
+      var classes = {
+         'Route':       'color1',
+         'RouteFloral': 'color2',
+         'Docks':       'color3',
+         'RouteRocky':  'color4',
+         'Graveyard':   'color5',
+         'Forest':      'color6',
+         'Volcano':     'color7',
+         'Town':        'color8'
+      };
+      return classes[coord.type];
+   };
+   
    var coordExitClasses = function(coord) {
       for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
          if ( coord.x == coord.exits[i]['0'] && coord.y > coord.exits[i]['1'] ) {
-            exits.push('ettop');
+            exits.push('exittop');
          }
          if ( coord.x == coord.exits[i]['0'] && coord.y < coord.exits[i]['1'] ) {
-            exits.push('ebottom');
+            exits.push('exitbottom');
          }
          if ( coord.y == coord.exits[i]['1'] && coord.x > coord.exits[i]['0'] ) {
-            exits.push('eleft');
+            exits.push('exitleft');
          }
          if ( coord.y == coord.exits[i]['1'] && coord.x < coord.exits[i]['0'] ) {
-            exits.push('eright');
+            exits.push('exitright');
          }
       }
       return exits.join(' ');
    };
 
-   var loadMap = function(mapId) {
+   var loadMap = function(mapId, coords) {
       for ( var children = [], i = 0; i < coords.length; i++ ) {
          children.push(createElement('div', [
-            'class',       classes[coords[i].type] + ' ' + coordExitClasses(coords[i]),
+            'class',      coordAreaClass(coords[i]) + ' ' + coordExitClasses(coords[i]),
             'data-name',   coords[i].town,
             'data-coords', coords[i].x + ', ' + coords[i].y
          ]));
@@ -2661,6 +2664,6 @@
 
    document.documentElement.innerHTml = '';
    document.getElementsByTagName('body')['0'].appendChild(createElement('div', ['id', 'map']));
-   loadMap('map');
+   loadMap('map', coords);
    
 })();
