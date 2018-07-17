@@ -74,7 +74,7 @@
       };
       self.parseEquippedPokemon = function(packet) {
          for ( var equipped = [], keys = Object.keys(packet), found = false, i = 0; i < keys.length; i++ ) {
-            if ( packet[keys[i]] && utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total']) ) {
+            if ( packet[keys[i]] && utilities.keysInObject(packet[keys[i]], ['pk', 'pokemon_id', 'position', 'level', 'hp_left', 'hp_total', 'attack_1_id', 'attack_2_id', 'attack_3_id', 'attack_4_id']) ) {
                found = utilities.findBy(data.pokemonList, 'id', packet[keys[i]].pokemon_id);
                (found && equipped.push({
                   'name':        found.name,
@@ -84,7 +84,8 @@
                   'position':    packet[keys[i]].position,
                   'level':       packet[keys[i]].level,
                   'health':      packet[keys[i]].hp_left,
-                  'totalHealth': packet[keys[i]].hp_total
+                  'totalHealth': packet[keys[i]].hp_total,
+                  'attackIds':   [packet[keys[i]].attack_1_id, packet[keys[i]].attack_2_id, packet[keys[i]].attack_3_id, packet[keys[i]].attack_4_id]
                }));
             }
          }
