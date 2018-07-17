@@ -68,7 +68,7 @@ div {
    overflow: hidden;
 }
 
-#map > div:after {
+#map > div:before {
    content: attr(data-coords);
    display: block;
    text-align: center;
@@ -76,18 +76,13 @@ div {
    text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
-   z-index: 2;
 }
 
-#map > div:not([data-name=""]):hover:after {
+#map > div:not([data-name=""]):hover:before {
    content: attr(data-name);
 }
 
 #map > div[data-highlight="1"]:after {
-   color: #222222;
-}
-
-#map > div[data-highlight="1"]:before {
    content: '';
    position: absolute;
    top: 0;
@@ -95,7 +90,6 @@ div {
    display: block;
    width: 100%;
    height: 100%;
-   background: #FFFFFF;
-   opacity: 0.8;
-   z-index: 1;
+   background: rgba(255, 255, 255, 0.25);
+   border-top: 4px solid #FFFF00;
 }
