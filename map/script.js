@@ -2632,25 +2632,9 @@
       };
       return classes[coord.type];
    };
-   
-   var coordExitClasses = function(coord) {
-      /*
-      for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
-         if ( coord.x == coord.exits[i]['0'] && coord.y > coord.exits[i]['1'] ) {
-            exits.push('exittop');
-         }
-         if ( coord.x == coord.exits[i]['0'] && coord.y < coord.exits[i]['1'] ) {
-            exits.push('exitbottom');
-         }
-         if ( coord.y == coord.exits[i]['1'] && coord.x > coord.exits[i]['0'] ) {
-            exits.push('exitleft');
-         }
-         if ( coord.y == coord.exits[i]['1'] && coord.x < coord.exits[i]['0'] ) {
-            exits.push('exitright');
-         }
-      }
-      return exits.join(' ');
-      */
+
+   var highlight = function() {
+      this.setAttribute('data-highlight', this.getAttribute('data-highlight') == 0 ? 1 : 0);
    };
 
    var loadMap = function(mapId, coords) {
@@ -2661,15 +2645,12 @@
             'data-coords',     coords[i].x + ', ' + coords[i].y,
             'data-highlight', '0'
          ]);
-         element.onclick = function() {
-            this.setAttribute('data-highlight', this.getAttribute('data-highlight') == 0 ? 1 : 0);
-         };
+         element.onclick = highlight;
          children.push(element);
       }
       appendChildren(document.getElementById(mapId), children);
    };
 
-   document.documentElement.innerHTml = '';
    document.getElementsByTagName('body')['0'].appendChild(createElement('div', ['id', 'map']));
    loadMap('map', coords);
    
