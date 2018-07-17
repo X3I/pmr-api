@@ -2634,6 +2634,7 @@
    };
    
    var coordExitClasses = function(coord) {
+      /*
       for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
          if ( coord.x == coord.exits[i]['0'] && coord.y > coord.exits[i]['1'] ) {
             exits.push('exittop');
@@ -2649,6 +2650,7 @@
          }
       }
       return exits.join(' ');
+      */
    };
 
    var loadMap = function(mapId, coords) {
