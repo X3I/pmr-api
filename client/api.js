@@ -96,6 +96,10 @@
          var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
          (pokemon && self.sendPacket('skill', {'pk': pokemon.id, 'index': attackNumber - 1}));
       };
+      self.learnMove = function(position, learn, forget) {
+         var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
+         (pokemon && self.sendPacket('moveTutorLearn', {'move_learn_id': learn, 'move_forget_id': forget, 'pokemon_pk': pokemon.id}));
+      };
       self.usePokeBall = function(name, id) {
          var item = utilities.findBy(data.items, 'name', name);
          (item && item.quantity > 0 && --item.quantity && self.sendPacket('pokeball', {'t': id, 'i': item.id}));
