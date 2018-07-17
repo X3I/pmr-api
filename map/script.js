@@ -2604,9 +2604,10 @@
       {"x":"25","y":"25","town":"","type":"Docks","id":"6","exits":[["25","24"],["26","25"],["24","25"],["25","26"]]}
    ];
 
-   var createElement = function(tag, attributes, value) {
+   var createElement = function(tag, attributes, value, onclick) {
       var element       = document.createElement(tag);
-      element.innerHTML = value || '';
+      element.innerHTML = value   || '';
+      element.onclick   = onclick || null;
       for ( var i = 0; attributes && i < attributes.length; i += 2 ) {
          element.setAttribute(attributes[i], attributes[i + 1]);
       }
@@ -2638,15 +2639,13 @@
    };
 
    var loadMap = function(mapId, coords) {
-      for ( var children = [], element = false, i = 0; i < coords.length; i++ ) {
-         element = createElement('div', [
+      for ( var children = [], i = 0; i < coords.length; i++ ) {
+         children.push(createElement('div', [
             'class',           coordAreaClass(coords[i]),
             'data-name',       coords[i].town,
             'data-coords',     coords[i].x + ', ' + coords[i].y,
             'data-highlight', '0'
-         ]);
-         element.onclick = highlight;
-         children.push(element);
+         ], false, highlight));
       }
       appendChildren(document.getElementById(mapId), children);
    };
