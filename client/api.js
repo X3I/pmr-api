@@ -88,9 +88,9 @@
          var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
          (pokemon && self.sendPacket('call', {'position': position, 'pk': pokemon.id, 'action': 'withdraw'}));
       };
-      self.evolvePokemon = function(position) {
+      self.evolvePokemon = function(position, id) {
          var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
-         (pokemon && self.sendPacket('evo', {'pk': pokemon.id, 'from': pokemon.monsterId, 'to': pokemon.monsterId + 1}));
+         (pokemon && self.sendPacket('evo', {'pk': pokemon.id, 'from': pokemon.monsterId, 'to': id}));
       };
       self.changePokemonAttack = function(position, attackNumber) {
          var pokemon = utilities.findBy(data.equippedPokemon, 'position', position);
