@@ -30,7 +30,7 @@
          for ( var entities = packet.entities, found = false, i = 0; i < entities.length; i++ ) {
             if ( utilities.keysInObject(entities[i], ['id', 'admin', 'money', 'x', 'y', 'tx', 'ty']) ) {
                utilities.deleteBy(data.trainers, 'name', entities[i].id);
-               data.trainers.push({
+               (packet.action !== 'leave' && data.trainers.push({
                   'admin':   entities[i].admin,
                   'name':    entities[i].id,
                   'money':   entities[i].money,
@@ -38,12 +38,12 @@
                   'y':       entities[i].y,
                   'targetX': entities[i].tx,
                   'targetY': entities[i].ty
-               });
+               }));
             }
             else if ( utilities.keysInObject(entities[i], ['id', 'monsterId', 'hp', 'hpt', 'shiny', 'x', 'y', 'tx', 'ty']) ) {
                found = utilities.findBy(data.pokemonList, 'id', entities[i].monsterId);
                utilities.deleteBy(data.pokemon, 'id', entities[i].monsterId);
-               (found && data.pokemon.push({
+               (packet.action !== 'leave' && found && data.pokemon.push({
                   'name':        found.name,
                   'rarity':      found.rarity,
                   'id':          entities[i].id,
