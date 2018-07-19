@@ -94,28 +94,30 @@ div {
    border-top: 4px solid #FFFF00;
 }
 
-#map > div > div.etop,
-#map > div > div.ebottom,
-#map > div > div.eleft,
-#map > div > div.eright {
+#map > div > div.etop:before,
+#map > div > div.ebottom:before,
+#map > div > div.eleft:before,
+#map > div > div.eright:before {
+   content: '';
    position: absolute;
-   width: 50%;
-   background: #FF0000;
-   height: 10px;
-}
-
-#map > div > div.etop {
    top: 0;
-}
-
-#map > div > div.ebottom {
-   bottom: 0;
-}
-
-#map > div > div.eleft {
    left: 0;
+   width: 100%;
+   height: 100%;
 }
 
-#map > div > div.eright {
-   right: 0;
+#map > div > div.etop:before {
+   border-top: 4px solid #ff0000;
+}
+
+#map > div > div.ebottom:before {
+   border-bottom: 4px solid #ff0000;
+}
+
+#map > div > div.eleft:before {
+   border-left: 4px solid #ff0000;
+}
+
+#map > div > div.eright:before {
+   border-right: 4px solid #ff0000;
 }
