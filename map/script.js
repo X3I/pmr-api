@@ -2634,6 +2634,24 @@
       return classes[coord.type];
    };
 
+	var coordAreaExitClasses = function(coord) {
+	   for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
+	      if ( coord.exits[i]['1'] < coord.y ) {
+	         exits.push('etop');
+	      }
+	      else if ( coord.exits[i]['1'] > coord.y ) {
+	         exits.push('ebottom');
+	      }
+	      if ( coord.exits[i]['0'] > coord.x ) {
+	         exits.push('eleft');
+	      }
+	      else if ( coord.exits[i]['0'] < coord.x ) {
+	         exits.push('eright');
+	      }
+	   }
+	   return exits.join(' ');
+	};
+
    var highlight = function() {
       this.setAttribute('data-highlight', this.getAttribute('data-highlight') == 0 ? 1 : 0);
    };
@@ -2641,7 +2659,7 @@
    var loadMap = function(mapId, coords) {
       for ( var children = [], i = 0; i < coords.length; i++ ) {
          children.push(createElement('div', [
-            'class',           coordAreaClass(coords[i]),
+            'class',           coordAreaClass(coords[i]) + ' ' + coordAreaExitClasses(coords[i]),
             'data-name',       coords[i].town,
             'data-coords',     coords[i].x + ', ' + coords[i].y,
             'data-highlight', '0'
