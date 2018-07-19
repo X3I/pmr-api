@@ -94,10 +94,10 @@ div {
    border-top: 4px solid #FFFF00;
 }
 
-#map > div > div.etop:before,
-#map > div > div.ebottom:before,
-#map > div > div.eleft:before,
-#map > div > div.eright:before {
+#map > div > div.etop,
+#map > div > div.ebottom,
+#map > div > div.eleft,
+#map > div > div.eright {
    content: '';
    position: absolute;
    top: 0;
@@ -106,18 +106,18 @@ div {
    height: 100%;
 }
 
-#map > div > div.etop:before {
+#map > div > div.etop {
    border-top: 4px solid #ff0000;
 }
 
-#map > div > div.ebottom:before {
+#map > div > div.ebottom {
    border-bottom: 4px solid #ff0000;
 }
 
-#map > div > div.eleft:before {
+#map > div > div.eleft {
    border-left: 4px solid #ff0000;
 }
 
-#map > div > div.eright:before {
+#map > div > div.eright {
    border-right: 4px solid #ff0000;
 }
