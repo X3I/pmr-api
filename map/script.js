@@ -2620,7 +2620,7 @@
       }
    };
 
-   var coordAreaClass = function(coord) {
+   var coordAreaColor = function(coord) {
       var classes = {
          'Route':       'color1',
          'RouteFloral': 'color2',
@@ -2634,36 +2634,42 @@
       return classes[coord.type];
    };
 
-	var coordAreaExitClasses = function(coord) {
-	   for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
+   var coordAreaExits = function(coord) {
+      for ( var exits = [], i = 0; i < coord.exits.length; i++ ) {
 	      if ( coord.exits[i]['1'] < coord.y ) {
-	         exits.push('etop');
+	         exits.push(createElement('div', ['class', 'etop'], false, false));
 	      }
 	      else if ( coord.exits[i]['1'] > coord.y ) {
-	         exits.push('ebottom');
+	         exits.push(createElement('div', ['class', 'ebottom'], false, false));
 	      }
 	      if ( coord.exits[i]['0'] > coord.x ) {
-	         exits.push('eleft');
+	         exits.push(createElement('div', ['class', 'eleft'], false, false));
 	      }
 	      else if ( coord.exits[i]['0'] < coord.x ) {
-	         exits.push('eright');
+	         exits.push(createElement('div', ['class', 'eright'], false, false));
 	      }
-	   }
-	   return exits.join(' ');
-	};
+      }
+      return exits;
+   };
 
-   var highlight = function() {
+   var coordAreahighlight = function() {
       this.setAttribute('data-highlight', this.getAttribute('data-highlight') == 0 ? 1 : 0);
+   };
+
+   var coordArea = function(coord) {
+      var area = createElement('div', [
+         'class',           coordAreaColor(coord),
+         'data-name',       coord.town,
+         'data-coords',     coord.x + ', ' + coord.y,
+         'data-highlight', '0'
+      ], false, coordAreahighlight);
+      appendChildren(area, coordAreaExits(coord));
+      return area;
    };
 
    var loadMap = function(mapId, coords) {
       for ( var children = [], i = 0; i < coords.length; i++ ) {
-         children.push(createElement('div', [
-            'class',           coordAreaClass(coords[i]) + ' ' + coordAreaExitClasses(coords[i]),
-            'data-name',       coords[i].town,
-            'data-coords',     coords[i].x + ', ' + coords[i].y,
-            'data-highlight', '0'
-         ], false, highlight));
+         children.push(coordArea(coords[i]));
       }
       appendChildren(document.getElementById(mapId), children);
    };
