@@ -1,3 +1,9 @@
+*, *:before, *:after {
+   box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+}
+
 html, body {
    height: 100%;
    padding: 0;
@@ -64,7 +70,7 @@ div {
 #map > div {
    width: 96px;
    float: left;
-   border: 2px solid #333333;
+   border: 1px solid #333333;
    overflow: hidden;
 }
 
@@ -102,40 +108,38 @@ div {
    position: absolute;
    top: 0;
    left: 0;
-   border-style: dashed;
-   border-color: #222;
-   border-width: 0px;
-   box-sizing: border-box;
-   -webkit-box-sizing: border-box;
-   -moz-box-sizing: border-box;
+   width:100%;
+   height: 100%;
 }
 
-#map > div > div.etop,
-#map > div > div.ebottom {
+#map > div > div.etop:before,
+#map > div > div.ebottom:before {
+   content: '';
    width: 50%;
    height: 100%;
    margin: 0 25%;
 }
 
-#map > div > div.eleft,
-#map > div > div.eright {
+#map > div > div.eleft:before,
+#map > div > div.eright:before {
+   content: '';
    width: 100%;
    height: 50%;
    margin: 25% 0;
 }
 
-#map > div > div.etop {
-   border-top-width: 4px;
+#map > div > div.etop:before {
+   border-top: 4px dashed #222;
 }
 
-#map > div > div.ebottom {
-   border-bottom-width: 4px;
+#map > div > div.ebottom:before {
+   border-bottom: 4px dashed #222;
 }
 
-#map > div > div.eleft {
-   border-left-width: 4px;
+#map > div > div.eleft:before {
+   border-left: 4px dashed #222;
 }
 
-#map > div > div.eright {
-   border-right-width: 4px;
+#map > div > div.eright:before {
+   border-right: 4px dashed #222;
 }
