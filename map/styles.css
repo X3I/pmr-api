@@ -93,3 +93,29 @@ div {
    background: rgba(255, 255, 255, 0.6);
    border-top: 4px solid #FFFF00;
 }
+
+#map > div > div.etop,
+#map > div > div.ebottom,
+#map > div > div.eleft,
+#map > div > div.eright {
+   position: absolute;
+   width: 50%;
+   background: #FF0000;
+   height: 10px;
+}
+
+#map > div > div.etop {
+   top: 0;
+}
+
+#map > div > div.ebottom {
+   bottom: 0;
+}
+
+#map > div > div.eleft {
+   left: 0;
+}
+
+#map > div > div.eright {
+   right: 0;
+}
