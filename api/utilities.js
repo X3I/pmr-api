@@ -2,8 +2,17 @@
    'use strict';
    window.modules.create('utilities', function() {
       var self          = this;
+      self.isNumber = function(number) {
+         return (typeof number == 'number');
+      };
+      self.isString = function(string) {
+         return (typeof string == 'string');
+      };
       self.isObject = function(object) {
          return (typeof object == 'object');
+      };
+      self.isArray = function(array) {
+         return (array instanceof Array);
       };
       self.keysInObject = function(object, keys) {
          for ( var i = 0, length = keys.length; self.isObject(object) && i < length; i++ ) {
