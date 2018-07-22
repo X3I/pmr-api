@@ -51,7 +51,7 @@
             'caught':   ['originator', 'monster', 'username', 'level'],
             'attack':   ['id', 'delta', 'hp']
          };
-         return (type in keys && utilities.keysInObject(packet, keys[type]));
+         return (type in keys && utilities.isObject(packet) && utilities.keysInObject(packet, keys[type]));
       };
       self.parseLocationChange = function(packet) {
          if ( self.packetValidation(packet, 'location') ) {
@@ -72,7 +72,7 @@
       };
       self.parseEquippedPokemon = function(packet) {
          for ( var i = 0, keys = Object.keys(packet), length = keys.length, pokemon = []; i < length; i++ ) {
-            if ( utilities.isObject(packet[keys[i]]) && self.packetValidation(packet[keys[i]], 'equipped') ) {
+            if ( self.packetValidation(packet[keys[i]], 'equipped') ) {
                pokemon.push({
                   'id':             packet[keys[i]].pk,
                   'pokemon':        packet[keys[i]].pokemon_id,
