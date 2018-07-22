@@ -1,7 +1,7 @@
 (function() {
    'use strict';
    window.modules.create('utilities', function() {
-      var self          = this;
+      var self      = this;
       self.isNumber = function(number) {
          return (typeof number == 'number');
       };
