@@ -9,7 +9,7 @@
          return (typeof string == 'string');
       };
       self.isObject = function(object) {
-         return (typeof object == 'object');
+         return (object !== null && typeof object == 'object');
       };
       self.isArray = function(array) {
          return (array instanceof Array);
