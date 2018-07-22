@@ -40,10 +40,10 @@
          }
       };
       self.packetValidation = function(packet, type) {
-         var keys = {
+         var keys = {       
             'location': ['area', 'id'],
             'target':   ['id', 'x', 'y', 'tx', 'ty'],
-            'equipped': ['pk', 'pokemon_id', 'name', 'level', 'position', 'hp', 'hp_total', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'special'],
+            'equipped': ['pk', 'pokemon_id', 'name', 'level', 'position', 'hp', 'hp_total', 'iv_atk', 'iv_spd', 'iv_def', 'iv_spatk', 'iv_spdef', 'special', 'attack_1_id', 'attack_2_id', 'attack_3_id', 'attack_4_id'],
             'items':    ['item_id', 'name', 'quantity'],
             'friends':  ['id', 'name', 'area'],
             'trainer':  ['admin', 'premium', 'id', 'money', 'x', 'y', 'tx', 'ty', 'running'],
@@ -86,7 +86,8 @@
                   'defence':        packet[keys[i]].iv_def,
                   'specialAttack':  packet[keys[i]].iv_spatk,
                   'specialDefence': packet[keys[i]].iv_spdef,
-                  'special':        packet[keys[i]].special
+                  'special':        packet[keys[i]].special,
+                  'attackIds':     [packet[keys[i]].attack_1_id, packet[keys[i]].attack_2_id, packet[keys[i]].attack_3_id, packet[keys[i]].attack_4_id]
                });
             }
          }
