@@ -72,7 +72,7 @@
       };
       self.parseEquippedPokemon = function(packet) {
          for ( var i = 0, keys = Object.keys(packet), length = keys.length, pokemon = []; i < length; i++ ) {
-            if ( self.packetValidation(packet[keys[i]], 'equipped') ) {
+            if ( utilities.isObject(packet[keys[i]]) && self.packetValidation(packet[keys[i]], 'equipped') ) {
                pokemon.push({
                   'id':             packet[keys[i]].pk,
                   'pokemon':        packet[keys[i]].pokemon_id,
