@@ -9,13 +9,13 @@
          return (typeof string == 'string');
       };
       self.isObject = function(object) {
-         return (object !== null && typeof object == 'object');
+         return (typeof object == 'object' && object !== null);
       };
       self.isArray = function(array) {
          return (array instanceof Array);
       };
       self.keysInObject = function(object, keys) {
-         for ( var i = 0, length = keys.length; self.isObject(object) && i < length; i++ ) {
+         for ( var i = 0, length = keys.length; i < length; i++ ) {
             if ( !(keys[i] in object) ) {
                return false;
             }
@@ -23,7 +23,7 @@
          return true;
       };
       self.sumKeys = function(object, keys) {
-         for ( var i = 0, length = keys.length, sum = 0; self.isObject(object) && i < length; i++ ) {
+         for ( var i = 0, length = keys.length, sum = 0; i < length; i++ ) {
             sum += object[keys[i]];
          }
          return sum;
