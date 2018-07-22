@@ -35,7 +35,7 @@
                // message
             break;
             default:
-               // console.log(packet);
+               console.log(packet);
             break;
          }
       };
