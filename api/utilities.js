@@ -3,7 +3,7 @@
    window.modules.create('utilities', function() {
       var self          = this;
       self.keysInObject = function(object, keys) {
-         for ( var i = 0, length = keys.length; i < length; i++ ) {
+         for ( var i = 0, length = keys.length; object && i < length; i++ ) {
             if ( !(keys[i] in object) ) {
                return false;
             }
@@ -11,7 +11,7 @@
          return true;
       };
       self.sumKeys = function(object, keys) {
-         for ( var i = 0, length = keys.length, sum = 0; i < length; i++ ) {
+         for ( var i = 0, length = keys.length, sum = 0; object && i < length; i++ ) {
             sum += object[keys[i]];
          }
          return sum;
