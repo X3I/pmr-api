@@ -2,8 +2,11 @@
    'use strict';
    window.modules.create('utilities', function() {
       var self          = this;
+      self.isObject = function(object) {
+         return (typeof object == 'object');
+      };
       self.keysInObject = function(object, keys) {
-         for ( var i = 0, length = keys.length; object && i < length; i++ ) {
+         for ( var i = 0, length = keys.length; self.isObject(object) && i < length; i++ ) {
             if ( !(keys[i] in object) ) {
                return false;
             }
@@ -11,7 +14,7 @@
          return true;
       };
       self.sumKeys = function(object, keys) {
-         for ( var i = 0, length = keys.length, sum = 0; object && i < length; i++ ) {
+         for ( var i = 0, length = keys.length, sum = 0; self.isObject(object) && i < length; i++ ) {
             sum += object[keys[i]];
          }
          return sum;
