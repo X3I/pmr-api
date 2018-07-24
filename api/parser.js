@@ -202,7 +202,9 @@
          else if ( packet.type == 'item' && self.packetValidation(packet, 'item') ) {
             var found  = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
             var found2 = utilities.findBy(data.pokemon,         'id', packet.originator);
-            (found && found2 && (found.health = found2.health = packet.hp));
+            if ( found && found2 ) {
+               found.health = found2.health = packet.hp;
+            }
          }
       };
       self.parseAttack = function(packet) {
