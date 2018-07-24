@@ -49,6 +49,7 @@
             'trainer':  ['admin', 'premium', 'id', 'money', 'x', 'y', 'tx', 'ty', 'running'],
             'pokemon':  ['shiny', 'id', 'monsterId', 'hp', 'hpt', 'x', 'y', 'tx', 'ty'],
             'caught':   ['originator', 'monster', 'username', 'level'],
+            'item':     ['hp', 'originator'],
             'attack':   ['id', 'delta', 'hp']
          };
          return (type in keys && utilities.isObject(packet) && utilities.keysInObject(packet, keys[type]));
@@ -197,6 +198,11 @@
                   'level':    packet.level
                });
             }
+         }
+         else if ( packet.type == 'item' && self.packetValidation(packet, 'item') ) {
+            var found  = utilities.findBy(data.equippedPokemon, 'id', packet.originator.slice(1));
+            var found2 = utilities.findBy(data.pokemon,         'id', packet.originator);
+            (found && found2 && (found.health = found2.health = packet.hp));
          }
       };
       self.parseAttack = function(packet) {
