@@ -21,6 +21,9 @@
       self.sellPokemon = function(pokemonIds) {
          self.sendPacket('lab', {'token': data.token, 'lab': pokemonIds});
       };
+      self.changeTeam = function(id1, id2, id3, id4, id5, id6) {
+         self.sendPacket('storage', {'token': data.token, 'team': [id1 || 0, id2 || 0, id3 || 0, id4 || 0, id5 || 0, id6 || 0]});
+      };
       self.moveAvatar = function(x, y) {
          self.sendPacket('target', {'x': x, 'y': y});
       };
